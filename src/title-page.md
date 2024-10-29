@@ -1,27 +1,25 @@
 # The Rust Programming Language
 
-*by Steve Klabnik, Carol Nichols, and Chris Krycho, with contributions from the
-Rust Community*
+*โดย Steve Klabnik, Carol Nichols, และ Chris Krycho, กับผู้มีส่วนร่วมจากชุมชน Rust*
 
-This version of the text assumes you’re using Rust 1.81.0 (released 2024-09-04)
-or later. See the [“Installation” section of Chapter 1][install]<!-- ignore -->
-to install or update Rust.
+เนื้อหาในเวอร์ชั่นนี้ถือว่าคุณใช้งาน Rust เวอร์ชั่น 1.81.0 (เผยแพร่เมื่อ 2024-09-04)
+หรือใหม่กว่า ดู [หัวข้อ “การติดตั้ง” ในบทที่ 1][install]
+เพื่อติดตั้งหรืออัพเดต Rust
 
-The HTML format is available online at
+รูปแบบ HTML ได้รับการเผยแพร่ที่ 
 [https://doc.rust-lang.org/stable/book/](https://doc.rust-lang.org/stable/book/)
-and offline with installations of Rust made with `rustup`; run `rustup doc
---book` to open.
+สำหรับออฟไลน์สามารถใช้ Rust ที่ติดตั้งด้วย `Rustup` โดยทำการรันคำสั่ง `rustup doc --book` เพื่อเปิด
 
-Several community [translations] are also available.
+นอกจากนี้ยังมี[การแปล][translations]หลายฉบับโดยชุมชน
 
-This text is available in [paperback and ebook format from No Starch
-Press][nsprust].
+เนื้อหานี้มีจำหน่ายใน[รูปแบบหนังสือปกอ่อนและอีบุ๊กจากสำนักพิมพ์ No Starch Press][nsprust]
 
 [install]: ch01-01-installation.html
 [editions]: appendix-05-editions.html
 [nsprust]: https://nostarch.com/rust-programming-language-2nd-edition
 [translations]: appendix-06-translation.html
 
-> **🚨 Want a more interactive learning experience? Try out a different version
-> of the Rust Book, featuring: quizzes, highlighting, visualizations, and
-> more**: <https://rust-book.cs.brown.edu>
+> **🚨 ต้องการประสบการณ์การเรียนรู้แบบโต้ตอบมากขึ้นหรือไม่? ลองอ่านหนังสือ
+> Rust เวอร์ชั่นอื่น โดยมีแบบทดสอบ การไฮไลต์ การแสดงภาพ และอื่นๆ**
+> <https://rust-book.cs.brown.edu>
+

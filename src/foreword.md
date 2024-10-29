@@ -1,16 +1,13 @@
-# Foreword
+# คำนำ
 
-It wasn’t always so clear, but the Rust programming language is fundamentally
-about *empowerment*: no matter what kind of code you are writing now, Rust
-empowers you to reach farther, to program with confidence in a wider variety of
-domains than you did before.
+มันมักจะไม่ชัดเจนอย่างมาก แต่ภาษาการเขียนโปรแกรม Rust โดยพื้นฐานแล้วเป็นเรื่องของการ *เสริมพลัง*
+ไม่สำคัญว่าตอนนี้คุณจะเขียนโค้ดประเภทใด Rust จะช่วยให้คุณไปได้ไกลขึ้น
+และสามารถเขียนโปรแกรมได้อย่างมั่นใจ
+ในขอบเขตที่หลากหลายมากกว่าที่คุณเคยทำมาก่อน
 
-Take, for example, “systems-level” work that deals with low-level details of
-memory management, data representation, and concurrency. Traditionally, this
-realm of programming is seen as arcane, accessible only to a select few who
-have devoted the necessary years learning to avoid its infamous pitfalls. And
-even those who practice it do so with caution, lest their code be open to
-exploits, crashes, or corruption.
+ตัวอย่างเช่น งาน “ระดับระบบ” ที่จัดการกับรายละเอียดระดับล่าง ของการจัดการหน่วยความจำ การแทนค่าข้อมูล และการทำงานพร้อมกัน โดยทั่วไปแล้วการเขียนโปรแกรมด้านนี้ถูกมองว่าเป็นเรื่องลึกลับ
+เข้าถึงได้เพียงคนเฉพาะกลุ่มเท่านั้น ซึ้งต้องใช้เวลาหลายปีในการเรียนรู้เพื่อหลีกเลี่ยงข้อผิดพลาดที่รู้จักกันดี
+และแม้แต่ผู้เชี่ยวชาญเองก็ยังคงต้องระมัดระวังการเขียนโค้ด เพื่อไม่ให้โค้ดของพวกเขามีช่องโหว่ ขัดข้อง หรือเสียหาย
 
 Rust breaks down these barriers by eliminating the old pitfalls and providing a
 friendly, polished set of tools to help you along the way. Programmers who need
