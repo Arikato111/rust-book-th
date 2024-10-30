@@ -8,57 +8,56 @@
 [nsp]: https://nostarch.com/
 
 ยินดีต้อนรับสู่ *ภาษาโปรแกรม Rust* หนังสือแนะนำเกี่ยวกับ Rust
-ภาษาโปรแกรม Rust ช่วยให้คุณเขียนซอฟแวร์ได้อย่างรวดเร็วและเชื่อถือได้
-การยศาสตร์ระดับสูงและการควบคุมระดับล่าง มักจะขัดแย้งกันในการออกแบบภาษาโปรแกรม
+ภาษาโปรแกรม Rust ช่วยให้คุณเขียนซอฟต์แวร์ได้อย่างรวดเร็วและเชื่อถือได้
+การยศาสตร์ระดับสูงและการควบคุมระดับต่ำ มักจะขัดแย้งกันในการออกแบบภาษาโปรแกรม
 Rust กำลังท้าทายความขัดแย้งดังกล่าว ด้วยการสร้างสมดุลระหว่างความสามารถทางเทคนิคอังทรงพลัง
 และประสบการณ์ของนักพัฒนาที่ยอดเยี่ยม
-Rust ให้ทางเลือกับคุณในการควบคุมรายละเอียดระดับล่าง (เช่นการใช้หน่วยความจำ) 
+Rust ให้ทางเลือกับคุณในการควบคุมรายละเอียดระดับต่ำ (เช่นการใช้หน่วยความจำ) 
 โดยปราศจากความยุ่งยากที่เกี่ยวข้องกับการควบคุมดังกล่าว
 
 ## Rust เหมาะกับใคร
 
-Rust เหมาะกับหลายๆ คนด้วยเหตุผลหลากหลายประการ ลองดูบางกลุ่มจากกลุ่มคนที่สำคัญที่สุดกัน
+Rust เหมาะกับหลาย ๆ คน ด้วยเหตุผลหลากหลายประการ ลองดูบางกลุ่มจากกลุ่มคนที่สำคัญที่สุดกัน
 
-### Teams of Developers
+### ทีมงานนักพัฒนา
 
-Rust is proving to be a productive tool for collaborating among large teams of
-developers with varying levels of systems programming knowledge. Low-level code
-is prone to various subtle bugs, which in most other languages can be caught
-only through extensive testing and careful code review by experienced
-developers. In Rust, the compiler plays a gatekeeper role by refusing to
-compile code with these elusive bugs, including concurrency bugs. By working
-alongside the compiler, the team can spend their time focusing on the program’s
-logic rather than chasing down bugs.
+Rust ได้พิสูจน์แล้วว่าเป็นเครื่องมือที่มีประสิทธิภาพ
+ในการทำงานร่วมกันระหว่างทีมนักพัฒนาขนาดใหญ่ 
+ที่มีความรู้ด้านการเขียนโปรแกรมระบบในระดับต่าง ๆ 
+โค้ดระดับต่ำมีแนวโน้มที่จะเกิดข้อบกพร่องเล็ก ๆ น้อย ๆ มากมาย 
+ซึ่งในภาษาอื่น ๆ ส่วนใหญ่สามารถตรวจพบได้โดยการทดสอบอย่างละเอียด 
+โดยนักพัฒนาที่มีประสบการณ์เท่านั้น
+ใน Rust คอมไพเลอร์มีบทบาทเป็นผู้เฝ้าประตู โดยปฏิเสธที่จะคอมไพล์โค้ดที่มีข้อบกพร่องที่เข้าใจอยากเหล่านี้
+รวมถึงข้อบกพร่องที่เกิดขึ้นพร้อมกัน ด้วยการทำงานร่วมกับคอมไพเลอร์ ทีมต่าง ๆ จึงสามารถใช้เวลามุ่งเน้นไปที่ตรรกะของโปรแกรม แทนที่จะไล่ตามจุดบกพร่อง
 
-Rust also brings contemporary developer tools to the systems programming world:
+Rust ยังนำเครื่องมือการพัฒนาที่ทันสมัยมาสู่โลกแห่งการเขียนโปรแกรมระบบ
 
-* Cargo, the included dependency manager and build tool, makes adding,
-  compiling, and managing dependencies painless and consistent across the Rust
-  ecosystem.
-* The Rustfmt formatting tool ensures a consistent coding style across
-  developers.
-* The rust-analyzer powers Integrated Development Environment (IDE)
-  integration for code completion and inline error messages.
+* Cargo คือเครื่องมือจัดการการพึ่งพา (dependency) และการคอมไพล์แบบบูรณาการ
+ทำให้การเพิ่ม การคอมไพล์ และการจัดการการพึ่งพา นั้นง่ายดายและสอดคล้องกันทั่วทั้งระบบนิเวศของ Rust
+* Rustfmt เครื่องมือจัดรูปแบบโค้ด ที่ช่วยให้นักพัฒนาซอฟต์แวร์มีรูปแบบการเขียนโค้ดที่สอดคล้องกัน
+* rust-analyzer รองรับการเติมโค้ดให้สมบูรณ์ และข้อความแสดงข้อผิดพลาดในบรรทัด 
+ผ่านการทำงานร่วมกับสภาพแวดล้อมสำหรับการพัฒนาแบบเบ็ดเสร็จ (IDE)
 
-By using these and other tools in the Rust ecosystem, developers can be
-productive while writing systems-level code.
+การใช้เครื่องมือเหล่านี้และเครื่องมืออื่น ๆ ในระบบนิเวศของ Rust 
+ช่วยให้นักพัฒนาทำงานได้อย่างมีประสิทธิภาพ
+ขณะเขียนโค้ดระดับระบบ (systems-level code)
 
-### Students
+### นักเรียน
 
-Rust is for students and those who are interested in learning about systems
-concepts. Using Rust, many people have learned about topics like operating
-systems development. The community is very welcoming and happy to answer
-student questions. Through efforts such as this book, the Rust teams want to
-make systems concepts more accessible to more people, especially those new to
-programming.
+Rust เหมาะกับนักเรียน และผู้ที่สนใจในการเรียนรู้เกี่ยวกับแนวคิดของระบบ
+ในการใช้งาน Rust ผู้คนต่าง ๆ จะได้เรียนรู้เกี่ยวกับหัวข้อต่าง ๆ เช่น การพัฒนาระบบปฏิบัติการ
+ชุมชนมีความยินดีเป็นอย่างยิ่ง และยินดีที่จะตอบคำถามของนักเรียน
+ด้วยความพยายามเช่นหนังสือเล่มนี้ ทีมงาน Rust 
+หวังว่าจะทำให้ผู้คนจำนวนมากสามารถเข้าถึงแนวคิดของระบบได้
+โดยเฉพาะผู้ที่กำลังเริ่มเขียนโปรแกรม
 
-### Companies
+### บริษัท
 
-Hundreds of companies, large and small, use Rust in production for a variety of
-tasks, including command line tools, web services, DevOps tooling, embedded
-devices, audio and video analysis and transcoding, cryptocurrencies,
-bioinformatics, search engines, Internet of Things applications, machine
-learning, and even major parts of the Firefox web browser.
+บริษัทหลายร้อยแห่ง ทั้งขนาดใหญ่และขนาดเล็ก ต่างใช้ Rust ในการพัฒนาสำหรับงานที่หลากหลาย
+ไม่ว่าจะเป็น โปรแกรมบรรทัดคำสั่ง, บริการเว็บ, เครื่องมือ DevOps, อุปกรณ์ฝังตัว, 
+การวิเคราะห์และการแปลงรหัสเสียงและวิดีโอ, คริปโทเคอร์เรนซี, ชีวสารสนเทศศาสตร์, เครื่องมือค้นหา, 
+แอปพลิเคชั่นอินเทอร์เน็ตของสรรพสิ่ง, การเรียนรู้ของเครื่อง (machine learning)
+และแม้แต่ส่วนสำคัญของเบราว์เซอร์ Firefox
 
 ### Open Source Developers
 
