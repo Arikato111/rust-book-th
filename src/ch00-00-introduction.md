@@ -1,24 +1,23 @@
-# Introduction
+#  บทนำ
 
-> Note: This edition of the book is the same as [The Rust Programming
-> Language][nsprust] available in print and ebook format from [No Starch
-> Press][nsp].
+> หมายเหตุ: หนังสือฉบับนี้เป็นฉบับเดียวกับ [The Rust Programming
+> Language][nsprust] ซึ่งมีจำหน่ายทั้งในรูปแบบหนังสือและอีบุ๊กที่ 
+> [No Starch Press][nsp]
 
 [nsprust]: https://nostarch.com/rust-programming-language-2nd-edition
 [nsp]: https://nostarch.com/
 
-Welcome to *The Rust Programming Language*, an introductory book about Rust.
-The Rust programming language helps you write faster, more reliable software.
-High-level ergonomics and low-level control are often at odds in programming
-language design; Rust challenges that conflict. Through balancing powerful
-technical capacity and a great developer experience, Rust gives you the option
-to control low-level details (such as memory usage) without all the hassle
-traditionally associated with such control.
+ยินดีต้อนรับสู่ *ภาษาโปรแกรม Rust* หนังสือแนะนำเกี่ยวกับ Rust
+ภาษาโปรแกรม Rust ช่วยให้คุณเขียนซอฟแวร์ได้อย่างรวดเร็วและเชื่อถือได้
+การยศาสตร์ระดับสูงและการควบคุมระดับล่าง มักจะขัดแย้งกันในการออกแบบภาษาโปรแกรม
+Rust กำลังท้าทายความขัดแย้งดังกล่าว ด้วยการสร้างสมดุลระหว่างความสามารถทางเทคนิคอังทรงพลัง
+และประสบการณ์ของนักพัฒนาที่ยอดเยี่ยม
+Rust ให้ทางเลือกับคุณในการควบคุมรายละเอียดระดับล่าง (เช่นการใช้หน่วยความจำ) 
+โดยปราศจากความยุ่งยากที่เกี่ยวข้องกับการควบคุมดังกล่าว
 
-## Who Rust Is For
+## Rust เหมาะกับใคร
 
-Rust is ideal for many people for a variety of reasons. Let’s look at a few of
-the most important groups.
+Rust เหมาะกับหลายๆ คนด้วยเหตุผลหลากหลายประการ ลองดูบางกลุ่มจากกลุ่มคนที่สำคัญที่สุดกัน
 
 ### Teams of Developers
 
