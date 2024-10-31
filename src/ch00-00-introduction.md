@@ -118,67 +118,64 @@ Rust มีความมุ่งมั่นที่จะสร้างโ
 string, และ hash map
 บทที่ 9 จะสำรวจปรัชญาและเทคนิคการจัดการข้อผิดพลาดของ Rust
 
-บทที่ 10 จะเจาะลึกเกี่ยวกับ trait และ lifetime โดยทั่วไป ซึ่งให้อำนาจแก่คุณในการกำหนดโค้ดที่นำไปใช้กับหลากหลายประเภท
+บทที่ 10 จะเจาะลึกเกี่ยวกับ trait และ lifetime โดยทั่วไป ซึ่งให้อำนาจแก่คุณในการกำหนดโค้ดที่นำไปใช้ได้กับหลากหลายประเภท
 บทที่ 11 เป็นเรื่องเกี่ยวกับการทดสอบ ซึ่งแม้จะมีการรับประกันความปลอดภัยของ Rust 
 แต่ก็เป็นสิ่งจำเป็นเพื่อให้แน่ใจว่าโปรแกรมของคุณทำงานได้อย่างถูกต้อง 
-ในบทที่ 12 เราจะพาคุณสร้างโปรแกรมที่มีการทำงานบางอย่าง จากโปรแกรมบรรทัดคำสั่ง `grep` ซึ่งสามารถค้นหาข้อความภายในไฟล์ โดยเราจะใช้แนวคิดหลายอย่างที่ได้กล่าวถึงในบทที่แล้ว
+ในบทที่ 12 เราจะพาคุณสร้างโปรแกรมที่มีการทำงานบางอย่าง จากโปรแกรมบรรทัดคำสั่ง `grep` 
+ซึ่งสามารถค้นหาข้อความภายในไฟล์ โดยเราจะใช้แนวคิดหลายอย่างที่ได้กล่าวถึงในบทที่แล้ว
 
-Chapter 13 explores closures and iterators: features of Rust that come from
-functional programming languages. In Chapter 14, we’ll examine Cargo in more
-depth and talk about best practices for sharing your libraries with others.
-Chapter 15 discusses smart pointers that the standard library provides and the
-traits that enable their functionality.
+บทที่ 13 จะสำรวจตัวปิดและการวนซ้ำ ในคุณสมบัติของ Rust ที่มาจากการเขียนโปรแกรมเชิงฟังก์ชัน
+ในบทที่ 14 เราจะเจาะลึกมากขึ้นเกี่ยวกับ Cargo และพูดคุยเกี่ยวกับแนวทางการปฏิบัติที่ดีที่สุดในการแบ่งปันไลบรารีของคุณกับผู้อื่น
+บทที่ 15 จะอภิปรายถึง smart pointer ที่ไลบรารีมาตรฐานจัดเตรียมไว้ให้ และ trait ที่เปิดใช้งานฟังก์ชั่นต่าง ๆ
 
-In Chapter 16, we’ll walk through different models of concurrent programming and
-talk about how Rust helps you to program in multiple threads fearlessly. In
-Chapter 17, we will build on that by exploring Rust’s async and await syntax and
-the lightweight concurrency model they support.
+ในบทที่ 16 เราจะกล่าวถึงโมเดลต่าง ๆ ในการเขียนโปรแกรมแบบพร้อมกัน (concurrent programming) 
+และพูดคุยเกี่ยวกับวิธีที่ Rust ช่วยคุณในการเขียนโปรแกรมในหลายเธรดโดยไม่ต้องกังวล 
+ในบทที่ 17 เราจะต่อยอดโดยการสำรวจไวยากรณ์ async และ await ของ Rust และโมเดลการทำงานแบบพร้อมกันที่ใช้ทรัพยากรน้อย
+ซึ่งพวกเขารองรับ
 
-Chapter 18 looks at how Rust idioms compare to object-oriented programming
-principles you might be familiar with.
+ในบทที่ 18 จะดูว่าสำนวนของ Rust เป็นอย่างไร เมื่อเปรียบเทียบกับหลักการเขียนโปรแกรมเชิงวัตถุที่คุณอาจคุ้นเคย
 
-Chapter 19 is a reference on patterns and pattern matching, which are powerful
-ways of expressing ideas throughout Rust programs. Chapter 20 contains a
-smorgasbord of advanced topics of interest, including unsafe Rust, macros, and
-more about lifetimes, traits, types, functions, and closures.
+บทที่ 19 เป็นการอ้างอิงถึงรูปแบบ และการจัดการรูปแบบ ซึ่งเป็นวิธีที่มีประสิทธิภาพในการแสดงออกถึงแนวคิด ตลอดทั้งโปรแกรมของ Rust
+บทที่ 20 ประกอบด้วยหัวข้อระดับสูงที่น่าสนใจ รวมถึง unsafe ใน Rust, macro, และอื่น ๆ เกี่ยวกับ lifetime, trait, type, function, และ closures
 
-In Chapter 21, we’ll complete a project in which we’ll implement a low-level
-multithreaded web server!
+ในบทที่ 21 เราจะทำโปรเจคให้เสร็จสมบูรณ์ โดยเราจะใช้งานเว็บเซิร์ฟเวอร์แบบมัลติเธรดระดับต่ำ
 
-Finally, some appendices contain useful information about the language in a
-more reference-like format. Appendix A covers Rust’s keywords, Appendix B
-covers Rust’s operators and symbols, Appendix C covers derivable traits
-provided by the standard library, Appendix D covers some useful development
-tools, and Appendix E explains Rust editions. In Appendix F, you can find
-translations of the book, and in Appendix G we’ll cover how Rust is made and
-what nightly Rust is.
+สุดท้ายนี้ ภาคผนวกบางส่วนมีข้อมูลที่เป็นประโยชน์เกี่ยวกับภาษา Rust ในรูปแบบที่คล้ายกับการอ้างอิง
+ภาคผนวก A ครอบคลุมถึงคีย์เวิร์ดของ Rust ภาคผนวก B ครอบคลุมถึงตัวดำเนินการและสัญลักษณ์ของ Rust
+ภาคผนวก C ครอบคลุมถึงการสีบถอด trait ที่มีในไลบรารีพื้นฐาน ภาคผนวก D ครอบคลุมถึงเครื่องมือพัฒนาที่มีประโยชน์
+และภาคผนวก E อธิบายถึงรุ่นต่าง ๆ ของ Rust
+ในภาคผนวก F คุณจะพบกับหนังสือเล่มนี้ในภาษาอื่น ๆ ที่ได้รับการแปล
+และในภาคผนวก G จะกล่าวถึง Rust เกิดขึ้นมาได้อย่างไร และ Rust แบบ nightly คืออะไร
 
-There is no wrong way to read this book: if you want to skip ahead, go for it!
-You might have to jump back to earlier chapters if you experience any
-confusion. But do whatever works for you.
+ไม่มีวิธีใดผิดในการอ่านหนังสือเล่มนี้ หากคุณต้องการข้ามบางส่วนไป อย่าลังเลที่จะทำ! 
+หากคุณรู้สึกสับสน คุณอาจต้องย้อนกลับไปยังบทก่อนหน้า
+อย่างไรก็ตาม จงเลือกวิธีที่เหมาะกับคุณ
 
 <span id="ferris"></span>
 
-An important part of the process of learning Rust is learning how to read the
-error messages the compiler displays: these will guide you toward working code.
-As such, we’ll provide many examples that don’t compile along with the error
-message the compiler will show you in each situation. Know that if you enter
-and run a random example, it may not compile! Make sure you read the
-surrounding text to see whether the example you’re trying to run is meant to
-error. Ferris will also help you distinguish code that isn’t meant to work:
+ส่วนสำคัญของกระบวนการเรียนรู้ Rust คือการเรียนรู้วิธีอ่านข้อความรายงานข้อผิดพลาดที่คอมไพเลอร์แสดง
+ข้อความเหล่านั้นจะช่วยนำคุณไปสู่โค้ดที่ใช้งานได้ ด้วยเหตุนี้ 
+เราจะยกตัวอย่างโค้ดมากมายที่ไม่สามารถคอมไพล์ไปพร้อมกับข้อความแสดงข้อผิดพลาด
+ที่คอมไพเลอร์แสดงให้คุณเห็นในแต่ละสถานการณ์
+โปรดทราบว่าหากคุณสุ่มเลือกตัวอย่างและทำการรัน ตัวอย่างนั้นอาจไม่สามารถคอมไพล์ได้!
+ตรวจสอบให้แน่ใจว่าคุณได้อ่านข้อความโดยรอบ เพื่อดูว่าตัวอย่างโค้ดที่คุณพยายามรันนั้นมีข้อผิดพลาดหรือไม่
+Ferris จะช่วยคุณแยกแยะโค้ดที่อาจไม่ทำงาน:
 
-| Ferris                                                                                                           | Meaning                                          |
+| Ferris                                                                                                           | ความหมาย                                          |
 |------------------------------------------------------------------------------------------------------------------|--------------------------------------------------|
-| <img src="img/ferris/does_not_compile.svg" class="ferris-explain" alt="Ferris with a question mark"/>            | This code does not compile!                      |
-| <img src="img/ferris/panics.svg" class="ferris-explain" alt="Ferris throwing up their hands"/>                   | This code panics!                                |
-| <img src="img/ferris/not_desired_behavior.svg" class="ferris-explain" alt="Ferris with one claw up, shrugging"/> | This code does not produce the desired behavior. |
+| <img src="img/ferris/does_not_compile.svg" class="ferris-explain" alt="Ferris with a question mark"/>            | โค้ดนี้ไม่สามารถคอมไพล์ได้!                               |
+| <img src="img/ferris/panics.svg" class="ferris-explain" alt="Ferris throwing up their hands"/>                   | โค้ดนี้ทำให้เกิด panic!                                 |
+| <img src="img/ferris/not_desired_behavior.svg" class="ferris-explain" alt="Ferris with one claw up, shrugging"/> | โค้ดนี้ไม่ได้ทำงานตามที่ต้องการ                             |
 
-In most situations, we’ll lead you to the correct version of any code that
-doesn’t compile.
 
-## Source Code
+ในสถานการณ์ส่วนใหญ่ สำหรับโค้ดที่ไม่สามารถคอมไพล์ได้ เราจะนำทางคุณไปสู่โค้ดในเวอร์ชั่นที่ถูกต้อง
 
-The source files from which this book is generated can be found on
-[GitHub][book].
+## ซอร์สโค้ด
+
+ไฟล์ต้นฉบับที่ใช้สร้างหนังสือเล่มนี้ถูกเผยแพร่อยู่บน [Github][book]
+
+> หมายเหตุ: ดูเวอร์ชั่นภาษาไทย[คลิกที่นี่][book-th]
 
 [book]: https://github.com/rust-lang/book/tree/main/src
+[book-th]: https://github.com/Arikato111/rust-book-th
+
