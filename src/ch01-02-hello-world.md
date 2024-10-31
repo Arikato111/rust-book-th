@@ -1,28 +1,28 @@
 ## Hello, World!
 
-Now that you’ve installed Rust, it’s time to write your first Rust program.
-It’s traditional when learning a new language to write a little program that
-prints the text `Hello, world!` to the screen, so we’ll do the same here!
+หลังจากที่คุณติดตั้ง Rust แล้ว ก็ถึงเวลาที่คุณจะได้สร้างโปรแกรมแรกของคุณเอง
+เป็นเรื่องปกติในการเรียนรู้ภาษาใหม่ที่จะได้สร้างโปรแกรมเล็ก ๆ ที่แสดงข้อความ `Hello, world!` บนหน้าจอ ดังนั้นเราก็จะทำแบบเดียวกันที่นี่!
 
-> Note: This book assumes basic familiarity with the command line. Rust makes
-> no specific demands about your editing or tooling or where your code lives, so
-> if you prefer to use an integrated development environment (IDE) instead of
-> the command line, feel free to use your favorite IDE. Many IDEs now have some
-> degree of Rust support; check the IDE’s documentation for details. The Rust
-> team has been focusing on enabling great IDE support via `rust-analyzer`. See
-> [Appendix D][devtools]<!-- ignore --> for more details.
+> หมายเหตุ: หนังสือเล่มนี้ถือว่าคุณมีความคุ้นเคยอยู่บ้างเกี่ยวกับการใช้งานบรรทัดคำสั่ง
+> Rust ไม่ได้กำหนดความต้องการเฉพาะเจาะจงเกี่ยวกับการแก้ไข เครื่องมือ หรือต่ำแหน่งของโค้ด
+> ดังนั้น หากคุณต้องการใช้สภาพแวดล้อมสำหรับการพัฒนาแบบเบ็ดเสร็จ (IDE) แทนบรรทัดคำสั่ง
+> คุณสามารถเลือกใช้ IDE ที่คุณชื่นชอบได้ตามสบาย ปัจจุบัน IDE จำนวนมากรองรับ 
+> Rust ในระดับหนึ่งแล้ว ตรวจสอบเอกสารคู่มือของ IDE เพื่อดูรายละเอียด 
+> ทีมงานของ Rust มุ่งเน้นไปที่การเปิดทางให้ IDE อันยอดเยี่ยมรองรับผ่าน `rust-analyzer`
+> ไปที่ [Appendix D][devtools]<!-- ignore --> เพื่อดูรายละเอียดเพิ่มเติม
 
-### Creating a Project Directory
+### การสร้างโฟลเดอร์สำหรับโปรเจกต์
 
-You’ll start by making a directory to store your Rust code. It doesn’t matter
-to Rust where your code lives, but for the exercises and projects in this book,
-we suggest making a *projects* directory in your home directory and keeping all
-your projects there.
+คุณจะเริ่มต้นด้วยการสร้าโฟลเดอร์สำหรับเก็บโค้ด Rust ของคุณ 
+ไม่สำคัญว่าโค้ดของคุณจะอยู่ในโฟลเดอร์ไหน
+แต่ในแบบฝึกหัดและโปรเจกต์ในหนังสือเล่มนี้ 
+เราแนะนำให้สร้างโฟลเดอร์ชื่อ *projects* ไว้ในโฟลเดอร์โฮมของคุณ 
+และเก็บโปรเจกต์ทั้งหมดของคุณไว้ที่นั่น
 
-Open a terminal and enter the following commands to make a *projects* directory
-and a directory for the “Hello, world!” project within the *projects* directory.
+เปิดเทอร์มันัลและรันคำสั่งต่อไปนี้ เพื่อสร้างโฟลเดอร์ที่ชื่อ *projects* และโฟลเดอร์สำหรับโปรเจกต์ 
+“Hello, world!” ที่อยู่ภายในโฟลเดอร์ *projects*
 
-For Linux, macOS, and PowerShell on Windows, enter this:
+สำหรับ Linux MacOS และ PowerShell บน Windows ใช้คำสั่งนี้:
 
 ```console
 $ mkdir ~/projects
@@ -31,7 +31,7 @@ $ mkdir hello_world
 $ cd hello_world
 ```
 
-For Windows CMD, enter this:
+สำหรับ Windows CMD ใช้คำสั่งนี้:
 
 ```cmd
 > mkdir "%USERPROFILE%\projects"
@@ -40,14 +40,13 @@ For Windows CMD, enter this:
 > cd hello_world
 ```
 
-### Writing and Running a Rust Program
+### การเขียนและการรันโปรแกรม Rust
 
-Next, make a new source file and call it *main.rs*. Rust files always end with
-the *.rs* extension. If you’re using more than one word in your filename, the
-convention is to use an underscore to separate them. For example, use
-*hello_world.rs* rather than *helloworld.rs*.
+จากนั้นสร้างไฟล์ต้นฉบับโดยตั้งชื่อว่า *main.rs* โดยไฟล์โค้ด Rust จะลงท้ายด้วยนามสกุล *.rs* เสมอ
+หากชื่อไฟล์ของคุณมีมากกว่าหนึ่งคำ ให้คั่นระหว่างคำด้วยเครื่องหมายขีดล่าง
+ตัวอย่างเช่น ใช้ *hello_world.rs* แทน *helloworld.rs* 
 
-Now open the *main.rs* file you just created and enter the code in Listing 1-1.
+จากนั้นเปิดไฟล์ *main.rs* ที่คุณเพิ่งสร้างไป และเขียนโค้ดตามรายการที่ 1-1
 
 <Listing number="1-1" file-name="main.rs" caption="A program that prints `Hello, world!`">
 
@@ -59,9 +58,8 @@ fn main() {
 
 </Listing>
 
-Save the file and go back to your terminal window in the
-*~/projects/hello_world* directory. On Linux or macOS, enter the following
-commands to compile and run the file:
+บันทึกไฟล์ จากนั้นกลับไปที่เทอร์มินัลของคุณในโฟลเดอร์ *~/projects/hello_world* 
+บน Linux หรือ MacOS รันคำสั่งต่อไปนี้เพื่อคอมไพล์และรันไฟล์:
 
 ```console
 $ rustc main.rs
@@ -69,7 +67,7 @@ $ ./main
 Hello, world!
 ```
 
-On Windows, enter the command `.\main.exe` instead of `./main`:
+บน Windows รันคำสั่ง `.\main.exe` แทนคำสั่ง `./main`:
 
 ```powershell
 > rustc main.rs
@@ -77,13 +75,12 @@ On Windows, enter the command `.\main.exe` instead of `./main`:
 Hello, world!
 ```
 
-Regardless of your operating system, the string `Hello, world!` should print to
-the terminal. If you don’t see this output, refer back to the
-[“Troubleshooting”][troubleshooting]<!-- ignore --> part of the Installation
-section for ways to get help.
+ไม่ว่าคุณจะใช้ระบบปฏิบัติการใด ข้อความ `Hello, world!` ควรแสดงผลบนเทอร์มินัล
+หากคุณไม่เห็นผลลัพธ์นี้ โปรดกลับไปที่ส่วน [“การแก้ไขปัญหา”][troubleshooting] ในบทการติดตั้ง
+สำหรับช่องทางในการขอความช่วยเหลือ
 
-If `Hello, world!` did print, congratulations! You’ve officially written a Rust
-program. That makes you a Rust programmer—welcome!
+หาก `Hello, world!` แสดงผล ยินดีด้วย! คุณได้เขียนโปรแกรม Rust อย่างเป็นทางการแล้ว
+และนั่นทำให้คุณเป็นโปรแกรมเมอร์ของ Rust ยินดีต้อนรับ!
 
 ### Anatomy of a Rust Program
 
@@ -197,5 +194,5 @@ grows, you’ll want to manage all the options and make it easy to share your
 code. Next, we’ll introduce you to the Cargo tool, which will help you write
 real-world Rust programs.
 
-[troubleshooting]: ch01-01-installation.html#troubleshooting
+[troubleshooting]: ch01-01-installation.html#การแกไขปัญหา
 [devtools]: appendix-04-useful-development-tools.html
