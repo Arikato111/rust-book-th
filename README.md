@@ -1,5 +1,7 @@
 # The Rust Programming Language (เวอร์ชั่นแปลไทย)
 
+### ยังแปลไม่เสร็จ
+
 ![Build Status](https://github.com/rust-lang/book/workflows/CI/badge.svg)
 
 This repository contains the source of "The Rust Programming Language" book.
