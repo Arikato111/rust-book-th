@@ -91,40 +91,37 @@ Rust มีความมุ่งมั่นที่จะสร้างโ
 โดยทั่วไป หนังสือเล่มนี้จะถือว่าคุณได้อ่านตามลำดับจากหน้าไปหลัง บทถัด ๆ ไปจะสร้างจากแนวคิดในบทก่อนหน้า
 และบทก่อนหน้าอาจไม่เจาะลึกรายละเอียดในหัวข้อใดหัวข้อหนึ่ง แต่จะกลับมาพูดถึงหัวข้อนั้นอีกครั้งในบทต่อ ๆ ไป
 
-You’ll find two kinds of chapters in this book: concept chapters and project
-chapters. In concept chapters, you’ll learn about an aspect of Rust. In project
-chapters, we’ll build small programs together, applying what you’ve learned so
-far. Chapters 2, 12, and 20 are project chapters; the rest are concept chapters.
+คุณจะพบว่ามีบทสองประเภทในหนังสือเล่มนี้ คือบทภาคทฤษฎี และบทภาคปฏิบัติ
+ในบทภาคทฤษฎี คุณจะได้เรียนรู้เกี่ยวกับแง่มุมหนึ่งของ Rust 
+ในบทภาคปฏิบัติ เราจะพาคุณสร้างโปรแกรมเล็ก ๆ โดยนำสิ่งที่คุณได้เรียนรู้มาประยุกต์ใช้
+บทที่ 2 12 และ 20 เป็นบทภาคปฏิบัติ ส่วนที่เหลือเป็นบทภาคทฤษฎี
 
-Chapter 1 explains how to install Rust, how to write a “Hello, world!” program,
-and how to use Cargo, Rust’s package manager and build tool. Chapter 2 is a
-hands-on introduction to writing a program in Rust, having you build up a
-number guessing game. Here we cover concepts at a high level, and later
-chapters will provide additional detail. If you want to get your hands dirty
-right away, Chapter 2 is the place for that. Chapter 3 covers Rust features
-that are similar to those of other programming languages, and in Chapter 4
-you’ll learn about Rust’s ownership system. If you’re a particularly meticulous
-learner who prefers to learn every detail before moving on to the next, you
-might want to skip Chapter 2 and go straight to Chapter 3, returning to Chapter
-2 when you’d like to work on a project applying the details you’ve learned.
+บทที่ 1 จะอธิบายวิธีการติดตั้ง Rust วิธีเขียนโปรแกรม “Hello, world!” 
+และวิธีใช้งาน Cargo ซึ่งเป็นเครื่องมือจัดการแพ็คเก็จและเครื่องมือคอมไพล์แบบบูรณาการ
+บทที่ 2 เป็นการแนะนำการเขียนภาษา Rust แบบลงมือทำ โดยจะให้คุณสร้างเกมทายตัวเลขขึ้นมา
+ใบบทถัด ๆ ไปจะครอบคลุมถึงแนวคิดระดับสูงและรายละเอียดเพิ่มเติม
+หากคุณต้องการเข้าสู่โลกของ Rust ทันที่
+หากคุณต้องการเริ่มเขียน Rust ทันที บทที่ 2 จะเหมาะสำหรับคุณ
+บทที่ 3 ครอบคลุมถึงคุณสมบัติต่าง ๆ ของ Rust ที่คล้ายกับภาษาโปรแกรมอื่น ๆ 
+และในบทที่ 4 คุณจะได้เรียนรู้เกี่ยวกับระบบ ownership ของ Rust
+หากคุณเป็นผู้เรียนที่ละเอียดรอบคอบเป็นพิเศษ และชอบที่จะเรียนรู้ทุกรายละเอียดก่อนจะไปบทถัดไป
+คุณอาจต้องการข้ามบทที่ 2 ไปยังบทที่ 3 เพื่อเก็บรายละเอียดต่าง ๆ ก่อนจะกลับมายังบทที่ 2 เพื่อลงมือปฏิบัติไปพร้อมกับรายละเอียดที่คุณได้รับ
 
-Chapter 5 discusses structs and methods, and Chapter 6 covers enums, `match`
-expressions, and the `if let` control flow construct. You’ll use structs and
-enums to make custom types in Rust.
+บทที่ 5 จะกล่าวถึง struct และ method
+และบทที่ 6 เนื้อหาจะครอบคุมถึง enum, การส่งออก `match`, 
+และโครงสร้างควบคุมการทำงาน `if let`
+ใน Rust คุณสามารถใช้ struct และ enum เพื่อสร้างประเภทของตัวแปรที่คุณกำหนดเองได้ (custom types)
 
-In Chapter 7, you’ll learn about Rust’s module system and about privacy rules
-for organizing your code and its public Application Programming Interface
-(API). Chapter 8 discusses some common collection data structures that the
-standard library provides, such as vectors, strings, and hash maps. Chapter 9
-explores Rust’s error-handling philosophy and techniques.
+ในบทที่ 7 คุณจะได้เรียนรู้กับระบบ module ของ Rust และกฎเกณฑ์ความเป็นส่วนตัวเพื่อจัดระเบียบโค้ดของคุณ
+และส่วนต่อประสานโปรแกรมประยุกต์ (API)
+บทที่ 8 จะกล่าวถึงโครงสร้างข้อมูลการรวบรวมโดยทั่วไปบางอย่าง ที่ไลบรารีมาตรฐานจัดเตรียมไว้แล้ว เช่น vector,
+string, และ hash map
+บทที่ 9 จะสำรวจปรัชญาและเทคนิคการจัดการข้อผิดพลาดของ Rust
 
-Chapter 10 digs into generics, traits, and lifetimes, which give you the power
-to define code that applies to multiple types. Chapter 11 is all about testing,
-which even with Rust’s safety guarantees is necessary to ensure your program’s
-logic is correct. In Chapter 12, we’ll build our own implementation of a subset
-of functionality from the `grep` command line tool that searches for text
-within files. For this, we’ll use many of the concepts we discussed in the
-previous chapters.
+บทที่ 10 จะเจาะลึกเกี่ยวกับ trait และ lifetime โดยทั่วไป ซึ่งให้อำนาจแก่คุณในการกำหนดโค้ดที่นำไปใช้กับหลากหลายประเภท
+บทที่ 11 เป็นเรื่องเกี่ยวกับการทดสอบ ซึ่งแม้จะมีการรับประกันความปลอดภัยของ Rust 
+แต่ก็เป็นสิ่งจำเป็นเพื่อให้แน่ใจว่าโปรแกรมของคุณทำงานได้อย่างถูกต้อง 
+ในบทที่ 12 เราจะพาคุณสร้างโปรแกรมที่มีการทำงานบางอย่าง จากโปรแกรมบรรทัดคำสั่ง `grep` ซึ่งสามารถค้นหาข้อความภายในไฟล์ โดยเราจะใช้แนวคิดหลายอย่างที่ได้กล่าวถึงในบทที่แล้ว
 
 Chapter 13 explores closures and iterators: features of Rust that come from
 functional programming languages. In Chapter 14, we’ll examine Cargo in more
