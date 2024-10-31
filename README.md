@@ -1,4 +1,4 @@
-# The Rust Programming Language
+# The Rust Programming Language (เวอร์ชั่นแปลไทย)
 
 ![Build Status](https://github.com/rust-lang/book/workflows/CI/badge.svg)
 
