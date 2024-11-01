@@ -1,51 +1,51 @@
 ## Hello, Cargo!
 
-Cargo is Rust’s build system and package manager. Most Rustaceans use this tool
-to manage their Rust projects because Cargo handles a lot of tasks for you,
-such as building your code, downloading the libraries your code depends on, and
-building those libraries. (We call the libraries that your code needs
-*dependencies*.)
+Cargo คือเครื่องมือจัดการแพ็กเก็จและระบบการบิ๊ลด์ของ Rust
+ซึ่ง Rustaceans ส่วนใหญ่ใช้เครื่องมือนี้เพื่อจัดการโปรเจกต์ Rust 
+เนื่องจาก Cargo สามารถจัดการงานต่าง ๆ มากมายให้กับคุณได้
+เช่น การบิ๊ลด์โค้ดของคุณ การดาวน์โหลดไลบรารีที่โค้ดของคุณต้องการ
+และทำการบิ๊ลด์ไลบรารีเหล่านั้น (เราเรียกไลบรารีที่โค้ดของคุณต้องการว่า *dependencies*)
 
-The simplest Rust programs, like the one we’ve written so far, don’t have any
-dependencies. If we had built the “Hello, world!” project with Cargo, it would
-only use the part of Cargo that handles building your code. As you write more
-complex Rust programs, you’ll add dependencies, and if you start a project
-using Cargo, adding dependencies will be much easier to do.
+โปรแกรมที่ง่ายที่สุดที่เราเคยเขียนมาแล้วก่อนหน้านี้ ไม่ได้ใช้ dependencies ใดเลย
+หากเราสร้างโปรเจกต์ “Hello, world!” ด้วย Cargo นั้น 
+Cargo จะใช้บางส่วนของมันในการบิ๊ลด์โค้ดของคุณ
+และเมื่อคุณเขียนโปรแกรม Rust ที่ซับซ้อนมากขึ้น
+คุณอาจจำเป็นต้องเพิ่ม dependencies
+หากคุณสร้างโปรเจกต์โดยใช้ Cargo การเพิ่ม dependencies จะเป็นเรื่องที่ง่ายมาก
 
-Because the vast majority of Rust projects use Cargo, the rest of this book
-assumes that you’re using Cargo too. Cargo comes installed with Rust if you
-used the official installers discussed in the
-[“Installation”][installation]<!-- ignore --> section. If you installed Rust
-through some other means, check whether Cargo is installed by entering the
-following in your terminal:
+เนื่องจากโปรเจกต์ Rust ส่วนใหญ่ใช้ Cargo 
+ส่วนที่เหลือของหนังสือเล่มนี้จะถือว่าคุณใช้ Cargo ด้วยเช่นกัน
+Cargo มาพร้อมกับ Rust อยู่แล้ว หากคุณทำตามวิธีติดตั้งโดยปกติ ซึ่งได้กล่าวถึงไปแล้วในหัวข้อ
+[“การติดตั้ง”][installation]
+แต่หากคุณติดตั้ง Rust ด้วยวิธีอื่น ให้ตรวจสอบว่า Cargo ได้ถูกติดตั้งหรือไม่ 
+โดยใช้คำสั่งดังต่อไปนี้:
 
 ```console
 $ cargo --version
 ```
 
-If you see a version number, you have it! If you see an error, such as `command
-not found`, look at the documentation for your method of installation to
-determine how to install Cargo separately.
+หากคุณเห็นหมายเลขเวอร์ชั่น แสดงว่าคุณได้ติดตั้ง Cargo แล้ว
+แต่หากคุณเห็นข้อความแจ้งข้อผิดพลาด เช่น `command not found`
+โปรดดูเอกสารประกอบวิธีการติดตั้งของคุณ เพื่อกำหนดวิธีการติดตั้ง Cargo โดยแยกกัน
 
-### Creating a Project with Cargo
+### การสร้างโปรเจกต์ด้วย Cargo
 
-Let’s create a new project using Cargo and look at how it differs from our
-original “Hello, world!” project. Navigate back to your *projects* directory
-(or wherever you decided to store your code). Then, on any operating system,
-run the following:
+มาสร้างโปรเจกต์ใหม่โดยใช้ Cargo กัน และดูว่ามันแตกต่างจากโปรเจกต์ “Hello, world!” อันเดิมอย่างไร
+กลับไปที่โฟลเดอร์ *projects* ของคุณ (หรือโฟลเดอร์ใดก็ตามที่คุณใช้เก็บโค้ด) จากนั้น
+ไม่ว่าจะเป็นระบบปฏิบัติการใด ให้รันคำสั่งต่อไปนี้:
 
 ```console
 $ cargo new hello_cargo
 $ cd hello_cargo
 ```
 
-The first command creates a new directory and project called *hello_cargo*.
-We’ve named our project *hello_cargo*, and Cargo creates its files in a
-directory of the same name.
+คำสั่งแรกจะสร้างโฟลเดอร์และโปรเจกต์ใหม่ที่มีชื่อว่า *hello_cargo*
+ซึ่งเราได้ตั้งชื่อโปรเจกต์ของเราว่า *hello_cargo* และ Cargo 
+จะสร้างไฟล์ในโฟลเดอร์ที่มีชื่อเดียวกัน
 
-Go into the *hello_cargo* directory and list the files. You’ll see that Cargo
-has generated two files and one directory for us: a *Cargo.toml* file and a
-*src* directory with a *main.rs* file inside.
+ไปที่โฟลเดอร์ *hello_cargo* และแสดงรายการไฟล์
+คุณจะพบว่า Cargo นั้นได้สร้างสองไฟล์และหนึ่งโฟลเดอร์ให้เรา โดยมีไฟล์ *Cargo.toml*
+โฟลเดอร์ *src* และไฟล์ *main.rs* อยู่ภายใน
 
 It has also initialized a new Git repository along with a *.gitignore* file.
 Git files won’t be generated if you run `cargo new` within an existing Git
