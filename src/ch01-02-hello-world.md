@@ -134,66 +134,62 @@ fn main() {
 ซึ่งระบุว่านิพจน์นี้จบการทำงานแล้ว และนิพจน์ถัดไปพร้อมจะเริ่มทำงาน
 โค้ดส่วนใหญ่ของ Rust จะลงท้ายด้วยเครื่องหมายอัฒภาค
 
-### Compiling and Running Are Separate Steps
+### การคอมไพล์และการรันในแต่ละขั้นตอน
 
-You’ve just run a newly created program, so let’s examine each step in the
-process.
+คุณเพิ่งรันโปรแกรมที่ได้สร้างขึ้นใหม่ ดังนั้นเรามาตรวจสอบกระบวนการในแต่ละขั้นตอนกัน
 
-Before running a Rust program, you must compile it using the Rust compiler by
-entering the `rustc` command and passing it the name of your source file, like
-this:
+ก่อนที่จะรันโปรแกรม Rust คุณอาจจะต้องคอมไพล์โค้ดด้วยคอมไพเลอร์ของ Rust โดยรันคำสั่ง `rustc` 
+และใส่ชื่อไฟล์ของคุณลงไป เช่น: 
 
 ```console
 $ rustc main.rs
 ```
 
-If you have a C or C++ background, you’ll notice that this is similar to `gcc`
-or `clang`. After compiling successfully, Rust outputs a binary executable.
+หากคุณมีประสบการณ์กับภาษา C หรือ C++ คุณจะสังเกตเห็นว่าคำสั่งนี้คล้ายกับ `gcc` หรือ `clang`
+หลังจากคอมไพล์เสร็จสมบูรณ์แล้ว Rust จะสร้างไฟล์ไบนารีที่สามารถรันได้
 
-On Linux, macOS, and PowerShell on Windows, you can see the executable by
-entering the `ls` command in your shell:
+บน Linux MacOS และ PowerShell บน Windows คุณสามารถพบไพล์ไบนารีโดยใช้คำสั่ง `ls`
+ที่ shell ของคุณ
 
 ```console
 $ ls
 main  main.rs
 ```
 
-On Linux and macOS, you’ll see two files. With PowerShell on Windows, you’ll
-see the same three files that you would see using CMD. With CMD on Windows, you
-would enter the following:
+บน Linux MacOS คุณจะพบกับสองไฟล์
+ส่วนบน PowerShell ใน Windows คุณจะพบกับไฟล์สามไฟล์ เช่นเดียวกับที่คุณเห็นโดยใช้ CMD
+สำหรับ CMD บน Windows ใช้คำสั่งต่อไปนี้:
 
 ```cmd
-> dir /B %= the /B option says to only show the file names =%
+> dir /B %= ตัวบงชี่ /B คือการระบุว่าให้แสดงผลชื่อไฟล์เท่านั้น =%
 main.exe
 main.pdb
 main.rs
 ```
-
-This shows the source code file with the *.rs* extension, the executable file
-(*main.exe* on Windows, but *main* on all other platforms), and, when using
-Windows, a file containing debugging information with the *.pdb* extension.
-From here, you run the *main* or *main.exe* file, like this:
+ซึ่งจะแสดงไฟล์ซอร์สโค้ดที่มีนามสกุล *.rs* และไฟล์สำหรับรัน 
+(*main.exe* สำหรับ Windows, และ *main* สำหรับระบบอื่น ๆ )
+เมื่อใช้ Windows จะมีไฟล์ข้อมูลการดีบักที่มีนามสกุล *.pdb* รวมอยู่ด้วย
+จากตรงนี้ คุณสามารถรันไพล์ *main* หรือ *main.exe* ได้ดังนี้:
 
 ```console
-$ ./main # or .\main.exe on Windows
+$ ./main # หรือ .\main.exe สำหรับ Windows
 ```
 
-If your *main.rs* is your “Hello, world!” program, this line prints `Hello,
-world!` to your terminal.
+หากไฟล์ *main.rs* ของคุณคือโปรแกรม “Hello, world!”
+คำสั่งนี้จะแสดงข้อความ `Hello, world!` บนเทอร์มินัลของคุณ
 
-If you’re more familiar with a dynamic language, such as Ruby, Python, or
-JavaScript, you might not be used to compiling and running a program as
-separate steps. Rust is an *ahead-of-time compiled* language, meaning you can
-compile a program and give the executable to someone else, and they can run it
-even without having Rust installed. If you give someone a *.rb*, *.py*, or
-*.js* file, they need to have a Ruby, Python, or JavaScript implementation
-installed (respectively). But in those languages, you only need one command to
-compile and run your program. Everything is a trade-off in language design.
+หากคุณมีความคุ้นเคยกับภาษาแบบไดนามิก เช่น Ruby, Python หรือ JavaScript
+คุณอาจไม่คุ้นเคยกับขั้นตอนการคอมไพล์และการรันที่แยกจากกัน
+Rust เป็นภาษาที่คอมไพล์*ล่วงหน้า* ซึ่งหมายความว่าคุณสามารถคอมไพล์โปรแกรม
+และส่งต่อไฟล์ที่ใช้รันให้กับคนอื่นได้ นอกจากนั้นพวกเขายังสามารถรันได้โดยไม่ต้องติดตั้ง Rust
+ในขณะที่ หากคุณให้ไฟล์ *.rb*, *.py* และ *.js* กับคนอื่น
+พวกเขาจำเป็นต้องติดตั้งโปรแกรมสำหรับรัน Ruby, Python หรือ JavaScript 
+แต่ในภาษาเหล่านี้ คุณสามารถใช้เพียงคำสั่งเดียวในการคอมไพล์และรันโปรแกรมของคุณ
+ในการออกแบบภาษาแล้ว มีได้ย่อมมีเสีย
 
-Just compiling with `rustc` is fine for simple programs, but as your project
-grows, you’ll want to manage all the options and make it easy to share your
-code. Next, we’ll introduce you to the Cargo tool, which will help you write
-real-world Rust programs.
+แค่คอมไพล์ด้วย `rustc` ก็เพียงพอแล้วสำหรับโปรแกรมง่าย ๆ แต่เมื่อโปรเจกต์ของคุณมีขนาดที่ใหญ่ขึ้น
+คุณจะต้องการจัดการตัวเลือกทั้งหมดและทำให้การแบ่งปันโค้ดของคุณง่ายขึ้น
+ถัดไป เราจะแนะนำให้คุณรู้จักกับเครื่องมือ Cargo ซึ่งจะช่วยคุณเขียนโปรแกรม Rust ในโลกแห่งความเป็นจริงได้
 
 [troubleshooting]: ch01-01-installation.html#การแกไขปัญหา
 [devtools]: appendix-04-useful-development-tools.html
