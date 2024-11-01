@@ -82,10 +82,10 @@ Hello, world!
 หาก `Hello, world!` แสดงผล ยินดีด้วย! คุณได้เขียนโปรแกรม Rust อย่างเป็นทางการแล้ว
 และนั่นทำให้คุณเป็นโปรแกรมเมอร์ของ Rust ยินดีต้อนรับ!
 
-### Anatomy of a Rust Program
+### กายวิภาคของ Rust
 
-Let’s review this “Hello, world!” program in detail. Here’s the first piece of
-the puzzle:
+เรามาทบทวนรายละเอียดของโปรแกรม “Hello, world!” กัน
+และนี่คือปริศนาชิ้นแรก:
 
 ```rust
 fn main() {
@@ -93,45 +93,46 @@ fn main() {
 }
 ```
 
-These lines define a function named `main`. The `main` function is special: it
-is always the first code that runs in every executable Rust program. Here, the
-first line declares a function named `main` that has no parameters and returns
-nothing. If there were parameters, they would go inside the parentheses `()`.
+บรรทัดเหล่านี้ประกาศฟังก์ชั่นชื่อ `main` โดยฟังก์ชั่น `main` 
+มีความพิเศษคือ จะเป็นส่วนแรกที่เริ่มทำงานในทุกโปรแกรมที่เขียนด้วย Rust
+โดยบรรทัดแรกที่ได้ประกาศฟังก์ชั่นชื่อ `main` นั้นไม่มี parameters และไม่ return ค่าอะไรเลย
+หากมี parameters มันจะอยู่ในวงเล็บ `()`
 
-The function body is wrapped in `{}`. Rust requires curly brackets around all
-function bodies. It’s good style to place the opening curly bracket on the same
-line as the function declaration, adding one space in between.
+ภายในของฟังก์ชั่นถูกครอบด้วย `{}` โดย Rust จำเป็นต้องมีวงเล็บปีกกาครอบภายในฟังก์ชั่นทั้งหมด
+เพื่อรูปแบบการเขียนที่ดี คุณควรวางวงเล็บปีกกาเปิดไว้ในบรรทัดเดียวกับการประกาศฟังก์ชั่น
+โดยเพิ่มช่องว่างคั่นกลางหนึ่งช่อง
 
-> Note: If you want to stick to a standard style across Rust projects, you can
-> use an automatic formatter tool called `rustfmt` to format your code in a
-> particular style (more on `rustfmt` in
-> [Appendix D][devtools]<!-- ignore -->). The Rust team has included this tool
-> with the standard Rust distribution, as `rustc` is, so it should already be
-> installed on your computer!
+> หมายเหตุ: หากคุณต้องการใช้รูปแบบการเขียนโค้ดมาตรฐานในโปรเจกต์ Rust
+> คุณสามารถใช้เครื่องมือจัดรูปแบบอัตโนมัติที่ชื่อ `rustfmt` 
+> เพื่อจัดระเบียบโค้ดของคุณให้อยู่ในรูปแบบมาตรฐาน (ดูรายละเอียดเพิ่มเติมเกี่ยวกับ `rustfmt` ใน 
+> [ภาคผนวก D][devtools])
+> ทีมงานของ Rust ได้รวบรวมเครื่องมือไว้กับการแจกจ่าย Rust แบบมาตรฐานแล้ว
+> เช่นเดียวกับ `rustc` ดังนั้นมันจึงควรถูกติดตั้งในเครื่องของคุณแล้วตอนนี้
 
-The body of the `main` function holds the following code:
+ภายในฟังก์ชั่น `main` มีโค้ดดังต่อไปนี้:
 
 ```rust
     println!("Hello, world!");
 ```
 
-This line does all the work in this little program: it prints text to the
-screen. There are four important details to notice here.
+บรรทัดนี้การทำงานทั้งหมดของโปรแกรมเล็ก ๆ นี้ ซึ่งจะแสดงผลข้อความออกทางหน้าจอ
+มีรายละเอียดสำคัญสี่อย่างที่ควรสังเกตดังนี้
 
-First, Rust style is to indent with four spaces, not a tab.
+อย่างแรก รูปแบบการเขียน Rust คือการเยื้องบรรทัดด้วยช่องว่างสี่ช่อง ไม่ใช่แทบ 
 
-Second, `println!` calls a Rust macro. If it had called a function instead, it
-would be entered as `println` (without the `!`). We’ll discuss Rust macros in
-more detail in Chapter 20. For now, you just need to know that using a `!`
-means that you’re calling a macro instead of a normal function and that macros
-don’t always follow the same rules as functions.
+อย่างที่สอง `println!` คือ macro ของ Rust โดยหากต้องการเรียกใช้ฟักง์ชั่นแทน
+จำเป็นจะต้องเขียนแบบนี้ `println` (ไม่มี `!`) 
+เราจะกล่าวถึงรายละเอียดเพิ่มเติมเกี่ยวกับ macro บน Rust ในบทที่ 20
+สำหรับตอนนี้ คุณเพียงต้องรู้ว่าการใช้ `!` หมายถึงคุณกำลังเรียกใช้ macro 
+แทนที่จะเป็นฟังก์ชั่นปกติ และ macro นั้นไม่ได้มีกฎการใช้งานเหมือนกับฟังก์ชั่นเสมอไป 
 
-Third, you see the `"Hello, world!"` string. We pass this string as an argument
-to `println!`, and the string is printed to the screen.
+อย่างที่สาม คุณจะสังเกตเห็นข้อความ `"Hello, world!"` 
+ซึ่งเราส่งข้อความนี้เป็น argument ไปยัง `println!` 
+จากนั้นข้อความจะแสดงผลออกที่หน้าจอ
 
-Fourth, we end the line with a semicolon (`;`), which indicates that this
-expression is over and the next one is ready to begin. Most lines of Rust code
-end with a semicolon.
+อย่างที่สี่ เราปิดท้ายบรรทัดด้วยเครื่องหมายอัฒภาค (`;`) 
+ซึ่งระบุว่านิพจน์นี้จบการทำงานแล้ว และนิพจน์ถัดไปพร้อมจะเริ่มทำงาน
+โค้ดส่วนใหญ่ของ Rust จะลงท้ายด้วยเครื่องหมายอัฒภาค
 
 ### Compiling and Running Are Separate Steps
 
