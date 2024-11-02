@@ -1,4 +1,6 @@
-## Variables and Mutability
+<!-- warn: "Variables and Mutability" ไม่แน่ใจว่าแปลไทยไปเลยจะตรงกับสิ่งที่จะสื่อหรือเปล่า 
+แต่ก็แปลเป็นไทยไปเลย เพราะไม่ได้เขียนว่า mutable ตรง ๆ  -->
+## ตัวแปรและความไม่แน่นอน
 
 As mentioned in the [“Storing Values with
 Variables”][storing-values-with-variables]<!-- ignore --> section, by default,

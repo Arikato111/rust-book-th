@@ -1,33 +1,32 @@
-# Programming a Guessing Game
+# การเขียนโปรแกรม เกมทายตัวเลข
 
-Let’s jump into Rust by working through a hands-on project together! This
-chapter introduces you to a few common Rust concepts by showing you how to use
-them in a real program. You’ll learn about `let`, `match`, methods, associated
-functions, external crates, and more! In the following chapters, we’ll explore
-these ideas in more detail. In this chapter, you’ll just practice the
-fundamentals.
+ก้าวเข้าสู่ Rust ด้วยการทำโปรเจกต์ในภาคปฏิบัติกัน! 
+ในบทนี้จะแนะนำให้คุณรู้จักกับแนวคิดทั่วไปของ Rust 
+โดยแสดงให้คุณเห็นถึงวิธีใช้งานในโปรแกรมจริง
+คุณจะได้เรียนรู้เกี่ยวกับ `let`, `match`, method ที่เกี่ยวข้องกับฟังก์ชั่น,
+crate และอื่น ๆ ! ในบทต่อไปนี้เราจะสำรวจแนวคิดเหล่านี้ให้ละเอียดยิ่งขึ้น
+ในบทนี้คุณจะเพียงฝึกฝนพื้นฐานเท่านั้น 
 
-We’ll implement a classic beginner programming problem: a guessing game. Here’s
-how it works: the program will generate a random integer between 1 and 100. It
-will then prompt the player to enter a guess. After a guess is entered, the
-program will indicate whether the guess is too low or too high. If the guess is
-correct, the game will print a congratulatory message and exit.
+เราจะใช้เกมทายตัวเลข ซึ่งเป็นปัญหาการเขียนโปรแกรมคลาสสิกสำหรับผู้เริ่มต้น
+วิธีการทำงาน: โปรแกรมจะสุ่มตัวเลขจำนวนเต็มขึ้นมา โดยอยู่ในระหว่าง 1 ถึง 100
+จากนั้นจะแจ้งให้ผู้เล่นทาย หลังจากป้อนตัวเลขที่ได้ทายแล้ว 
+โปรแกรมจะระบุว่าตัวเลขที่ทายนั้นต่ำหรือสูงเกินไป
+หากทายถูก เกมจะแสดงข้อความแสดงความยินดี และออกจากโปรแกรม
 
-## Setting Up a New Project
+## สร้างโปรเจกต์ใหม่
 
-To set up a new project, go to the *projects* directory that you created in
-Chapter 1 and make a new project using Cargo, like so:
+ในการสร้างโปรเจกต์ใหม่ ไปที่โฟลเดอร์ *projects* ที่คุณได้สร้างไว้เมื่อบทที่ 1
+และสร้างโปรเจกต์ใหม่โดยใช้ Cargo ดังต่อไปนี้:
 
 ```console
 $ cargo new guessing_game
 $ cd guessing_game
 ```
 
-The first command, `cargo new`, takes the name of the project (`guessing_game`)
-as the first argument. The second command changes to the new project’s
-directory.
+คำสั่งแรก `cargo new` ใช้ชื่อของโปรเจกต์ (`guessing_game`) เป็น argument แรก
+คำสั่งที่สองย้ายไปที่โฟลเดอร์ของโปรเจกต์ใหม่
 
-Look at the generated *Cargo.toml* file:
+ดูไฟล์ *Cargo.toml* ทีได้สร้างขึ้น:
 
 <!-- manual-regeneration
 cd listings/ch02-guessing-game-tutorial
@@ -38,40 +37,39 @@ cargo run > output.txt 2>&1
 cd ../../..
 -->
 
-<span class="filename">Filename: Cargo.toml</span>
+<span class="filename">ชื่อไฟล์: Cargo.toml</span>
 
 ```toml
 {{#include ../listings/ch02-guessing-game-tutorial/no-listing-01-cargo-new/Cargo.toml}}
 ```
 
-As you saw in Chapter 1, `cargo new` generates a “Hello, world!” program for
-you. Check out the *src/main.rs* file:
+อย่างที่คุณเห็นไปในบทที่ 1 ซึ่ง `cargo new` ได้สร้างโปรแกรม “Hello, world!” ให้คุณ
+ตรวจสอบไฟล์ *src/main.rs*:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">ชื่อไฟล์: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch02-guessing-game-tutorial/no-listing-01-cargo-new/src/main.rs}}
 ```
 
-Now let’s compile this “Hello, world!” program and run it in the same step
-using the `cargo run` command:
+ตอนนี้เรามาคอมไพล์โปรแกรม “Hello, world!” และรันโดยใช้เพียงหนึ่งขั้นตอนด้วยคำสั่ง `cargo run`:
 
 ```console
 {{#include ../listings/ch02-guessing-game-tutorial/no-listing-01-cargo-new/output.txt}}
 ```
 
-The `run` command comes in handy when you need to rapidly iterate on a project,
-as we’ll do in this game, quickly testing each iteration before moving on to
-the next one.
+คำสั่ง `run` มีประโยชน์เมื่อคุณจำเป็นต้องทำซ้ำอย่างรวดเร็ว (rapidly iterate) ในโปรเจกต์
+เช่นเดียวกับที่เราจะทำในเกมนี้ โดยการทดสอบการวนซ้ำแต่ละครั้งอย่างรวดเร็ว 
+ก่อนจะไปยังการวนซ้ำถัดไป
 
-Reopen the *src/main.rs* file. You’ll be writing all the code in this file.
+เปิดไฟล์ *src/main.rs* ขึ้นมาอีกครั้ง คุณจะเขียนโค้ดทั้งหมดในไฟล์นี้
 
-## Processing a Guess
+## การประมวลผลการคาดเดา
 
-The first part of the guessing game program will ask for user input, process
-that input, and check that the input is in the expected form. To start, we’ll
-allow the player to input a guess. Enter the code in Listing 2-1 into
-*src/main.rs*.
+ในส่วนแรกของเกมทายตัวเลข เกมจะข้อให้ผู้ใช้ป้อนข้อมูล
+ประมวลผลข้อมูลนั้น และตรวจสอบว่าข้อมูลนั้นอยู่ในรูปแบบที่ถูกต้องหรือไม่
+ในการเริ่มต้นเราจะอนุญาตให้ผู้เล่นป้อนตัวเลขที่คาดเดา พิมพ์โค้ดตามรายการที่ 2-1
+บน *src/main.rs*
 
 <Listing number="2-1" file-name="src/main.rs" caption="Code that gets a guess from the user and prints it">
 
@@ -81,65 +79,57 @@ allow the player to input a guess. Enter the code in Listing 2-1 into
 
 </Listing>
 
-This code contains a lot of information, so let’s go over it line by line. To
-obtain user input and then print the result as output, we need to bring the
-`io` input/output library into scope. The `io` library comes from the standard
-library, known as `std`:
+โค้ดนี้ประกอบไปด้วยข้อมูลจำนวนมาก ดังนั้นเรามาดูกันทีละบรรทัด
+ในการรับข้อมูลที่ผู้ใช้ป้อนเข้ามา และแสดงผลลัพธ์ออกไป เราจำเป็นต้องนำไลบรารี input/output `io`
+เข้ามาในขอบเขต โดยไลบรารี `io` นั้นมาจากไลบรารีมาตรฐาน ซึ่งเป็นที่รู้จักในชื่อ `std`
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:io}}
 ```
 
-By default, Rust has a set of items defined in the standard library that it
-brings into the scope of every program. This set is called the *prelude*, and
-you can see everything in it [in the standard library documentation][prelude].
+โดยค่าเริ่มต้น Rust จะนำบางรายการที่กำหนดไว้ในไลบรารีมาตรฐาน มาไว้ในขอบเขตของทุกโปรแกรม
+ชุดนี้เรียกว่า *prelude* และคุณสามารถดูทุกสิ่งทุกอย่างที่อยู่ในนั้นได้
+[ในเอกสารคู่มือไลบรารีมาตรฐาน][prelude]
 
-If a type you want to use isn’t in the prelude, you have to bring that type
-into scope explicitly with a `use` statement. Using the `std::io` library
-provides you with a number of useful features, including the ability to accept
-user input.
+หากสิ่งที่คุณต้องการใช้ไม่อยู่ใน prelude คุณต้องนำสิ่งนั้นมาไว้ยังขอบเขตอย่างชัดเจน
+ด้วยคำสั่ง `use` ซึ่งการใช้ไลบรารี `std::io` จะมอบคุณสมบัติที่มากมายให้กับคุณ 
+รวมถึงความสามารถในการรับค่าจากผู้ใช้
 
-As you saw in Chapter 1, the `main` function is the entry point into the
-program:
+อย่างที่คุณได้เห็นในบทที่ 1 ฟังก์ชั่น `main` คือจุดเริ่มต้นของโปรแกรม:
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:main}}
 ```
 
-The `fn` syntax declares a new function; the parentheses, `()`, indicate there
-are no parameters; and the curly bracket, `{`, starts the body of the function.
+ไวยากรณ์ `fn` จะประกาศฟังก์ชั่นใหม่; วงเล็บ `()` เป็นตัวระบุว่าไม่มี parameters;
+และวงเล็บปีกกาเปิด `{` เป็นจุดเริ่มต้นภายในฟังก์ชั่น
 
-As you also learned in Chapter 1, `println!` is a macro that prints a string to
-the screen:
+อย่างที่คุณได้เรียนรู้ในบทที่ 1 `println!` คือ macro ซึ่งสามารถแสดงข้อความออกทางหน้าจอ:
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:print}}
 ```
 
-This code is printing a prompt stating what the game is and requesting input
-from the user.
+โค้ดนี้จะแสดงผลข้อความที่แจ้งว่าเกมอะไรและขอให้ผู้ใช้ป้อนข้อมูล
 
-### Storing Values with Variables
+### การจัดเก็บค่าด้วยตัวแปร
 
-Next, we’ll create a *variable* to store the user input, like this:
+ถัดไป เราจะสร้าง *ตัวแปร* ที่เก็บค่าจากผู้ใช้ที่ป้อนเข้ามา ดังต่อไปนี้:
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:string}}
 ```
 
-Now the program is getting interesting! There’s a lot going on in this little
-line. We use the `let` statement to create the variable. Here’s another example:
+ตอนนี้โปรแกรมเริ่มน่าสนใจขึ้นแล้ว! มีอีกมากมายที่เกิดขึ้นในบรรทัดเล็ก ๆ นี่
+เราใช้คำสั่ง `let` เพื่อประกาศตัวแปร ตรงนี้เป็นอีกหนึ่งตัวอย่าง:
 
 ```rust,ignore
 let apples = 5;
 ```
 
-This line creates a new variable named `apples` and binds it to the value 5. In
-Rust, variables are immutable by default, meaning once we give the variable a
-value, the value won’t change. We’ll be discussing this concept in detail in
-the [“Variables and Mutability”][variables-and-mutability]<!-- ignore -->
-section in Chapter 3. To make a variable mutable, we add `mut` before the
-variable name:
+บรรทัดนี้จะประกาศตัวแปรใหม่ชื่อ `apples` และกำหนดค่าเป็น 5 โดยใน Rust ตัวแปรจะมีค่าเริ่มต้นเป็น immutable ซึ่งหมายถึงหลังจากที่คุณกำหนดค่าให้กับตัวแปรในครั้งแรกแล้ว ค่าจะไม่เปลี่ยนแปลง
+เราจะกล่าวถึงรายละเอียดเพิ่มเติมเกี่ยวกับแนวคิดนี้ในหัวข้อ [“ตัวแปรและความไม่แน่นอน”][variables-and-mutability] ของบทที่ 3 
+และในการสร้างตัวแปร mutable เราจะเพิ่ม `mut` ไว้หน้าชื่อตัวแปร:
 
 ```rust,ignore
 let apples = 5; // immutable
