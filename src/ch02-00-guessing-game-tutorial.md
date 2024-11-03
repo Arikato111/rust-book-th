@@ -66,7 +66,7 @@ cd ../../..
 
 ## การประมวลผลการคาดเดา
 
-ในส่วนแรกของเกมทายตัวเลข เกมจะข้อให้ผู้ใช้ป้อนข้อมูล
+ในส่วนแรกของเกมทายตัวเลข เกมจะขอให้ผู้ใช้ป้อนข้อมูล
 ประมวลผลข้อมูลนั้น และตรวจสอบว่าข้อมูลนั้นอยู่ในรูปแบบที่ถูกต้องหรือไม่
 ในการเริ่มต้นเราจะอนุญาตให้ผู้เล่นป้อนตัวเลขที่คาดเดา พิมพ์โค้ดตามรายการที่ 2-1
 บน *src/main.rs*
@@ -80,20 +80,20 @@ cd ../../..
 </Listing>
 
 โค้ดนี้ประกอบไปด้วยข้อมูลจำนวนมาก ดังนั้นเรามาดูกันทีละบรรทัด
-ในการรับข้อมูลที่ผู้ใช้ป้อนเข้ามา และแสดงผลลัพธ์ออกไป เราจำเป็นต้องนำไลบรารี input/output `io`
-เข้ามาในขอบเขต โดยไลบรารี `io` นั้นมาจากไลบรารีมาตรฐาน ซึ่งเป็นที่รู้จักในชื่อ `std`
+ในการรับ input จากผู้ใช้แล้วแสดงผลลัพธ์เป็น output เราจำเป็นต้องนำเข้าไลบารรี input/output `io`
+เข้ามามาในขอบเขต โดยไลบรารี `io` มาจากไลบรารีมาตรฐาน ที่รู้จักในชื่อ `std`
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:io}}
 ```
 
-โดยค่าเริ่มต้น Rust จะนำบางรายการที่กำหนดไว้ในไลบรารีมาตรฐาน มาไว้ในขอบเขตของทุกโปรแกรม
-ชุดนี้เรียกว่า *prelude* และคุณสามารถดูทุกสิ่งทุกอย่างที่อยู่ในนั้นได้
+โดยค่าเริ่มต้น Rust จะนำบางรายการที่กำหนดไว้ในไลบรารีมาตรฐาน เข้ามาไว้ในขอบเขตของทุกโปรแกรม
+ซึ่งเรียกว่า *prelude* คุณสามารถดูรายละเอียดทั้งหมดได้
 [ในเอกสารคู่มือไลบรารีมาตรฐาน][prelude]
 
-หากสิ่งที่คุณต้องการใช้ไม่อยู่ใน prelude คุณต้องนำสิ่งนั้นมาไว้ยังขอบเขตอย่างชัดเจน
-ด้วยคำสั่ง `use` ซึ่งการใช้ไลบรารี `std::io` จะมอบคุณสมบัติที่มากมายให้กับคุณ 
-รวมถึงความสามารถในการรับค่าจากผู้ใช้
+หากสิ่งที่คุณต้องการใช้ไม่อยู่ใน prelude คุณต้องนำเข้าสิ่งนั้นมาไว้ยังขอบเขตที่ชัดเจน
+ด้วยคำสั่ง `use` การใช้ไลบรารี `std::io` จะมอบคุณสมบัติมากมายให้กับคุณ 
+รวมถึงความสามารถในการรับ input จากผู้ใช้
 
 อย่างที่คุณได้เห็นในบทที่ 1 ฟังก์ชั่น `main` คือจุดเริ่มต้นของโปรแกรม:
 
@@ -130,7 +130,8 @@ let apples = 5;
 <!-- warn: "immutable" และ "mutable" จะเขียนเป็นภาษาอังกฤษไปเลย 
             แทนที่จะเขียนทับศัพท์หรือแปลไทย เพราะจะได้เกิดความเข้าใจและคุ้นชิ้น  -->
 
-บรรทัดนี้จะประกาศตัวแปรใหม่ชื่อ `apples` และกำหนดค่าเป็น 5 โดยใน Rust ตัวแปรจะมีค่าเริ่มต้นเป็น immutable ซึ่งหมายถึงหลังจากที่คุณกำหนดค่าให้กับตัวแปรในครั้งแรกแล้ว ค่าจะไม่เปลี่ยนแปลง
+บรรทัดนี้จะประกาศตัวแปรใหม่ชื่อ `apples` และกำหนดค่าเป็น 5 โดยใน Rust ตัวแปรจะมีค่าเริ่มต้นเป็น immutable ซึ่งหมายถึง
+หลังจากที่คุณกำหนดค่าให้กับตัวแปรในครั้งแรกแล้ว ค่าจะไม่เปลี่ยนแปลง
 เราจะกล่าวถึงรายละเอียดเพิ่มเติมเกี่ยวกับแนวคิดนี้ในหัวข้อ [“ตัวแปรและความไม่แน่นอน”][variables-and-mutability] ของบทที่ 3 
 และในการสร้างตัวแปร mutable เราจะเพิ่ม `mut` ไว้หน้าชื่อตัวแปร:
 
@@ -139,27 +140,31 @@ let apples = 5; // immutable
 let mut bananas = 5; // mutable
 ```
 
-> Note: The `//` syntax starts a comment that continues until the end of the
-> line. Rust ignores everything in comments. We’ll discuss comments in more
-> detail in [Chapter 3][comments]<!-- ignore -->.
+> หมายเหตุ: ไวยากรณ์ `//` หมายถึงจุดเริ่มต้นของ comment ยาวไปจนจบบรรทัด
+> ซึ่ง Rust จะเพิกเฉยกับอะไรก็ตามที่อยู่ใน comment
+> เราจะกล่าวถึงรายละเอียดเพิ่มเติมเกี่ยวกับ comment ใน [บทที่ 3][comments]
 
-Returning to the guessing game program, you now know that `let mut guess` will
-introduce a mutable variable named `guess`. The equal sign (`=`) tells Rust we
-want to bind something to the variable now. On the right of the equal sign is
-the value that `guess` is bound to, which is the result of calling
-`String::new`, a function that returns a new instance of a `String`.
-[`String`][string]<!-- ignore --> is a string type provided by the standard
-library that is a growable, UTF-8 encoded bit of text.
+<!-- warn: ย่อหน้านี้อ่านแล้วดูไม่ลื่นเลย -->
+กลับมาที่เกมทายตัวเลข ตอนนี้คุณรู้แล้วว่า `let mut guess` จะสร้างตัวแปร mutable ชื่อ `guess`
+ส่วนเครื่องหมายเท่ากับ (`=`) เป็นการบอก Rust ว่าเราต้องการกำหนดค่าบางอย่างให้กับตัวแปร
+ทางด้านขวาของเครื่องหมายเท่ากับคือค่าที่กำหนดให้กับตัวแปร `guess` ซึ่งก็คือผลลัพธ์ที่ได้จากการเรียกใช้
+`String::new` ที่ return อินสแตนซ์ใหม่ของ `String` 
+โดย [`String`][string] ที่กล่าวถึงนี้คือประเภท string ที่อยู่ในไลบรารีมาตรฐาน ที่ซึ่งสามารถขยายขนาดได้
+และข้อความถูกเข้ารหัสในรูปแบบ UTF-8
 
-The `::` syntax in the `::new` line indicates that `new` is an associated
-function of the `String` type. An *associated function* is a function that’s
-implemented on a type, in this case `String`. This `new` function creates a
-new, empty string. You’ll find a `new` function on many types because it’s a
-common name for a function that makes a new value of some kind.
+<!-- warn: "type" หากแปลเป็นคำว่า "ประเภท" โดยตรง หรือเขียนเป็นคำอังกฤษตรง ๆ 
+           รู้สึกว่ามันยังสื่อความหมายไม่ชัดเจน เลยเขียนเป็น "ประเภทของตัวแปร" -->
 
-In full, the `let mut guess = String::new();` line has created a mutable
-variable that is currently bound to a new, empty instance of a `String`. Whew!
+ไวยากรณ์ `::` ในบรรทัด `::new` บงชี้ว่า `new` เป็นฟังก์ชั่นที่เกี่ยวข้องกับประเภท `String`
+โดย *ฟังก์ชั่นที่เกี่ยวข้อง* หมายถึงฟังก์ชั่นที่ถูกนำไปใช้กับประเภทตัวแปรนั้น ๆ หรือในกรณีนี้ก็คือ `String`
+และฟังก์ชั่น `new` ได้สร้าง string เปล่าอันใหม่ขึ้นมา
+คุณจะพบฟังก์ชั่น `new` ในหลายประเภทของตัวแปร 
+เนื่องจากเป็นชื่อสามัญสำหรับฟังก์ชั่นที่สร้างค่าใหม่ขึ้นมา
 
+คำอธิบายเต็มคือ บรรทัด `let mut guess = String::new();` ได้สร้างตัวแปร mutable 
+ที่ถูกกำหนดค่าเป็นอินสแตนซ์ใหม่ของ `String`; หวีว!
+
+### การรับ input จากผู้ใช้
 ### Receiving User Input
 
 Recall that we included the input/output functionality from the standard
@@ -906,15 +911,15 @@ types, and functions, and shows how to use them in Rust. Chapter 4 explores
 ownership, a feature that makes Rust different from other languages. Chapter 5
 discusses structs and method syntax, and Chapter 6 explains how enums work.
 
-[prelude]: ../std/prelude/index.html
-[variables-and-mutability]: ch03-01-variables-and-mutability.html#variables-and-mutability
+[prelude]: https://doc.rust-lang.org/std/prelude/index.html
+[variables-and-mutability]: ch03-01-variables-and-mutability.html#ตัวแปรและความไมแนนอน
 [comments]: ch03-04-comments.html
-[string]: ../std/string/struct.String.html
-[iostdin]: ../std/io/struct.Stdin.html
-[read_line]: ../std/io/struct.Stdin.html#method.read_line
-[result]: ../std/result/enum.Result.html
+[string]: https://doc.rust-lang.org/std/string/struct.String.html
+[iostdin]: https://doc.rust-lang.org/std/io/struct.Stdin.html
+[read_line]: https://doc.rust-lang.org/std/io/struct.Stdin.html#method.read_line
+[result]: https://doc.rust-lang.org/std/result/enum.Result.html
 [enums]: ch06-00-enums.html
-[expect]: ../std/result/enum.Result.html#method.expect
+[expect]: https://doc.rust-lang.org/std/result/enum.Result.html#method.expect
 [recover]: ch09-02-recoverable-errors-with-result.html
 [randcrate]: https://crates.io/crates/rand
 [semver]: http://semver.org
@@ -923,5 +928,5 @@ discusses structs and method syntax, and Chapter 6 explains how enums work.
 [doccratesio]: https://doc.rust-lang.org/cargo/reference/publishing.html
 [match]: ch06-02-match.html
 [shadowing]: ch03-01-variables-and-mutability.html#shadowing
-[parse]: ../std/primitive.str.html#method.parse
+[parse]: https://doc.rust-lang.org/std/primitive.str.html#method.parse
 [integers]: ch03-02-data-types.html#integer-types
