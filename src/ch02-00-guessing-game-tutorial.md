@@ -165,41 +165,33 @@ let mut bananas = 5; // mutable
 ที่ถูกกำหนดค่าเป็นอินสแตนซ์ใหม่ของ `String`; หวีว!
 
 ### การรับ input จากผู้ใช้
-### Receiving User Input
 
-Recall that we included the input/output functionality from the standard
-library with `use std::io;` on the first line of the program. Now we’ll call
-the `stdin` function from the `io` module, which will allow us to handle user
-input:
+จำได้ว่าเรานำเข้าฟังก์ชั่น input/output จากไลบรารีมาตรฐานด้วย `use std::io;`
+ในบรรทัดแรกของโปรแกรม ตอนนี้เราจะเรียกใช้ฟังก์ชั่น `stdin` จากโมดูล `io` 
+ซึ่งจะช่วยให้เราสามารถรับค่า input จากผู้ใช้ได้:
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:read}}
 ```
 
-If we hadn’t imported the `io` library with `use std::io;` at the beginning of
-the program, we could still use the function by writing this function call as
-`std::io::stdin`. The `stdin` function returns an instance of
-[`std::io::Stdin`][iostdin]<!-- ignore -->, which is a type that represents a
-handle to the standard input for your terminal.
+หากเราไม่ได้นำเข้าไลบรารี `io` ด้วย `use std::io;` ที่จุดเริ่มต้นของโปรแกรม
+เรายังคงสามารถใช้งานฟังก์ชั่นได้ โดยการเรียกใช้ฟังก์ชั่นแบบนี้ `std::io::stdin`
+ฟังก์ชั่น `stdin` จะ return อินสแตนซ์ของ [`std::io::Stdin`][iostdin]
+ซึ่งก็คือประเภทของตัวแปรที่สามารถรับ input มาตรฐานสำหรับเทอร์มินัลของคุณ
 
-Next, the line `.read_line(&mut guess)` calls the [`read_line`][read_line]<!--
-ignore --> method on the standard input handle to get input from the user.
-We’re also passing `&mut guess` as the argument to `read_line` to tell it what
-string to store the user input in. The full job of `read_line` is to take
-whatever the user types into standard input and append that into a string
-(without overwriting its contents), so we therefore pass that string as an
-argument. The string argument needs to be mutable so the method can change the
-string’s content.
+ถัดไป บรรทัด `.read_line(&mut guess)` จะเรียกใช้ method [`read_line`][read_line]
+จากการจัดการ input มาตรฐานเพื่อรับ input จากผู้ใช้ นอกจากนี้เรายังส่ง `&mut guess` เป็น argument
+ไปที่ `read_line` เพื่อบอกว่าข้อความจาก input ของผู้ใช้จะเก็บที่ตัวแปรนี้
+งานทั้งหมดของ `read_line` คือการนำสิ่งที่ผู้ใช้พิมพ์ไปเป็น input มาตรฐาน และผนวกเข้ากับ string
+(โดยไม่ต้องเขียนทับเนื้อหา) ดังนั้นเราจึงสิ่งตัวแปร string ไปเป็น argument
+และ argument นั้นต้องเป็น mutable เพื่อให้ method สามารถเปลี่ยนแปลงข้อความใน argument ได้
 
-The `&` indicates that this argument is a *reference*, which gives you a way to
-let multiple parts of your code access one piece of data without needing to
-copy that data into memory multiple times. References are a complex feature,
-and one of Rust’s major advantages is how safe and easy it is to use
-references. You don’t need to know a lot of those details to finish this
-program. For now, all you need to know is that, like variables, references are
-immutable by default. Hence, you need to write `&mut guess` rather than
-`&guess` to make it mutable. (Chapter 4 will explain references more
-thoroughly.)
+อักขระ `&` บ่งชี้ว่า argument นั้นเป็น *reference* ซึ่งช่วยให้คุณอนุญาตให้โค้ดหลาย ๆ ส่วน
+สามารถเข้าถึงข้อมูลจำนวนหนึ่งโดยไม่จำเป็นต้องคัดลอกข้อมูลนั้นลงในหน่วยความจำหลายครั้ง
+*reference* เป็นคุณสมบัติที่ซับซ้อน และเป็นข้อดีหลัก ๆ ข้อหนึ่งของ Rust ที่ช่วยให้ปลอดภัยและง่ายต่อการใช้ reference
+คุณไม่จำเป็นต้องรู้รายละเอียดมากมายเพื่อเขียนโปรแกรมนี้ให้สำเร็จ สำหรับตอนนี้ ทั้งหมดที่คุณจำเป็นต้องรู้คือ
+reference มีค่าเริ่มต้นเป็น immutable เช่นเดียวกับตัวแปร ดังนั้นคุณต้องเขียน
+`&mut guess` แทน `&guess` เพื่อทำให้มันเป็น mutable (บทที่ 4 จะอธิบาย reference ให้ละเอียดมากขึ้น)
 
 <!-- Old heading. Do not remove or links may break. -->
 <a id="handling-potential-failure-with-the-result-type"></a>
