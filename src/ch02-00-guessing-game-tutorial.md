@@ -280,9 +280,10 @@ println!("x = {x} and y + 2 = {}", y + 2);
 
 โค้ดนี้จะแสดง `x = 5 and y + 2 = 12`
 
-### Testing the First Part
+### การทดสอบในส่วนแรก
 
-Let’s test the first part of the guessing game. Run it using `cargo run`:
+มาทดสอบส่วนแรกของเกมทายตัวเลขกัน โดยรันคำสั่ง `cargo run`:
+
 
 <!-- manual-regeneration
 cd listings/ch02-guessing-game-tutorial/listing-02-01/
@@ -301,31 +302,27 @@ Please input your guess.
 You guessed: 6
 ```
 
-At this point, the first part of the game is done: we’re getting input from the
-keyboard and then printing it.
+ในตอนนี้ ส่วนแรกของเกมก็เสร็จเรียบร้อยแล้ว เรากำลังรับ input จากคีย์บอร์ดจากนั้นก็แสดงผลออกมา
 
-## Generating a Secret Number
+## สร้างตัวเลขที่เป็นความลับ
 
-Next, we need to generate a secret number that the user will try to guess. The
-secret number should be different every time so the game is fun to play more
-than once. We’ll use a random number between 1 and 100 so the game isn’t too
-difficult. Rust doesn’t yet include random number functionality in its standard
-library. However, the Rust team does provide a [`rand` crate][randcrate] with
-said functionality.
+ถัดไป เราจำเป็นต้องสร้างตัวเลขลับเพื่อให้ผู้ใช้พยายามทายให้ถูก ตัวเลขลับควรแตกต่างกันในแต่ละครั้งที่เล่นเกม
+เพื่อให้เกมสนุกยิ่งขึ้นหากเล่นหลายครั้ง เราจะใช้ตัวเลขสุ่มระหว่าง 1 ถึง 100 เพื่อให้เกมไม่ยากเกินไป
+Rust ไม่มีฟังก์ชั่นสุ่มเลขในไลบรารีมาตรฐาน อย่างไรก็ตามทีมงาน Rust ได้จัดเตรียม [crate `rand`][randcrate]
+ที่มีฟังก์ชั่นดังกล่าวไว้แล้ว
 
-### Using a Crate to Get More Functionality
+### การใช้ crate เพื่อเพิ่มฟังก์ชั่นการใช้งาน
 
-Remember that a crate is a collection of Rust source code files. The project
-we’ve been building is a *binary crate*, which is an executable. The `rand`
-crate is a *library crate*, which contains code that is intended to be used in
-other programs and can’t be executed on its own.
+โปรดจำไว้ว่า crate นั้นคือชุดของไฟล์ซอร์สโค้ดของ Rust 
+โปรเจกต์ที่เรากำลังสร้างคือ *crate ไบนารี* ซึ่งก็คือไฟล์ที่สามารถรันได้
+ส่วน crate `rand` ก็คือ *crate ไลบรารี* ซึ่งบรรจุโค้ดที่ตั้งใจให้ใช้กับโปรแกรมอื่น ๆ และไม่สามารถรันได้ด้วยตัวเอง 
 
-Cargo’s coordination of external crates is where Cargo really shines. Before we
-can write code that uses `rand`, we need to modify the *Cargo.toml* file to
-include the `rand` crate as a dependency. Open that file now and add the
-following line to the bottom, beneath the `[dependencies]` section header that
-Cargo created for you. Be sure to specify `rand` exactly as we have here, with
-this version number, or the code examples in this tutorial may not work:
+การประสานงานของ Cargo กับ crate ภายนอกคือจุดที่ Cargo โดดเด่นจริง ๆ 
+ก่อนที่เราจะเขียนโค้ดโดยใช้ `rand` เราจำเป็นต้องแก้ไขไฟล์ *Cargo.toml* 
+เพื่อเพิ่ม crate `rand` ไปยัง dependency โดยทำการเปิดไฟล์ดังกล่าวขึ้นมา
+และเพิ่มบรรทัดต่อไปนี้ที่ด้านล่าง ใต้ส่วนหัว `[dependencies]` ที่ Cargo ได้สร้างให้คุณ
+ตรวจสอบให้แน่ใจว่าได้ระบุ `rand` แบบเดียวกับที่เราระบุไว้ที่นี่ โดยใช้เวอร์ชั่นเดียวกันนี้
+มิฉะนั้น ตัวอย่างโค้ดในบทช่วยสอนนี้อาจใช้การไม่ได้:
 
 <!-- When updating the version of `rand` used, also update the version of
 `rand` used in these files so they all match:
@@ -339,23 +336,20 @@ this version number, or the code examples in this tutorial may not work:
 {{#include ../listings/ch02-guessing-game-tutorial/listing-02-02/Cargo.toml:8:}}
 ```
 
-In the *Cargo.toml* file, everything that follows a header is part of that
-section that continues until another section starts. In `[dependencies]` you
-tell Cargo which external crates your project depends on and which versions of
-those crates you require. In this case, we specify the `rand` crate with the
-semantic version specifier `0.8.5`. Cargo understands [Semantic
-Versioning][semver]<!-- ignore --> (sometimes called *SemVer*), which is a
-standard for writing version numbers. The specifier `0.8.5` is actually
-shorthand for `^0.8.5`, which means any version that is at least 0.8.5 but
-below 0.9.0.
+ในไฟล์ *Cargo.toml* ทุกสิ่งทุกอย่างที่ตามหลังส่วนหัวจะเป็นส่วนหนึ่งของส่วนหัว 
+ต่อเนื่องไปจนกว่าจะเริ่มส่วนหัวอื่น ๆ โดยใน `[dependencies]`
+คุณได้แจ้งให้ Cargo ทราบว่า crate 
+ภายนอกที่โปรเจกต์ของคุณจำเป็นต้องใช้และเวอร์ชั่นที่เกี่ยวข้องมีอะไรบ้าง
+ในกรณีนี้ เราระบุ crate `rand` พร้อมกับเวอร์ชั่นเชิงความหมาย `0.8.5`
+โดย Cargo เข้าใจ[การกำหนดเวอร์ชั่นเชิงความหมาย][semver] (บางครั้งเรียกว่า *SemVer*)
+ซึ่งเป็นมาตรฐานในการเขียนหมายเลขเวอร์ชั่น การระบุ `0.8.5` จริง ๆ แล้วคือรูปย่อของ `^0.8.5`
+ซึ่งหมายถึงเวอร์ชั่น 0.8.5 หรือใหม่กว่า แต่ต้องต่ำกว่า 0.9.0 ลงมา 
 
-Cargo considers these versions to have public APIs compatible with version
-0.8.5, and this specification ensures you’ll get the latest patch release that
-will still compile with the code in this chapter. Any version 0.9.0 or greater
-is not guaranteed to have the same API as what the following examples use.
+Cargo ถือว่าเวอร์ชั่นเหล่านี้มี API สาธารณะที่เข้ากันได้กับเวอร์ชั่น 0.8.5 
+และข้อกำหนดนี้รับประกันว่าคุณจะยังได้รับแพตช์เวอร์ชั่นล่าสุด 
+โดยที่ยังสามารถคอมไพล์กับโค้ดในบทนี้ได้ แต่ไม่รับประกันว่าเวอร์ชั่น 0.9.0 หรือสูงกว่าจะมี API เดียวกันกับตัวอย่างต่อไปนี้:
 
-Now, without changing any of the code, let’s build the project, as shown in
-Listing 2-2.
+ตอนนี้ เรามาคอมไพล์โปรเจกต์โดยยังไม่ต้องแก้ไขโค้ดใด ๆ ดังที่แสดงในรายการ 2-2
 
 <!-- manual-regeneration
 cd listings/ch02-guessing-game-tutorial/listing-02-02/
@@ -388,30 +382,28 @@ $ cargo build
 
 </Listing>
 
-You may see different version numbers (but they will all be compatible with the
-code, thanks to SemVer!) and different lines (depending on the operating
-system), and the lines may be in a different order.
+คุณอาจจะเห็นหมายเลขเวอร์ชั่นที่ต่างกัน (แต่ทั้งหมดจะเข้ากันได้กับโค้ด ขอบคุณ SemVer!)
+และบรรทัดที่ต่างกัน (ขึ้นอยู่กับระบบปฏิบัติการ) และบรรทัดอาจจะอยู่ในลำดับที่ต่างกัน
 
-When we include an external dependency, Cargo fetches the latest versions of
-everything that dependency needs from the *registry*, which is a copy of data
-from [Crates.io][cratesio]. Crates.io is where people in the Rust ecosystem
-post their open source Rust projects for others to use.
+เมื่อเรานำเข้า dependency ภายนอก Cargo จะทำการดึงทุกสิ่งทุกอย่างในเวอร์ชั่นล่าสุดที่ dependency ต้องการ จาก *registry* ซึ่งเป็นสำเนาของข้อมูลจาก [Crates.io][cratesio]
+Crates.io เป็นที่ที่ผู้คนในระบบนิเวศของ Rust โพสต์โปรเจกต์ 
+Rust โอเพ่นซอร์ส เพื่อให้คนอื่น ๆ ได้ใช้งาน
 
-After updating the registry, Cargo checks the `[dependencies]` section and
-downloads any crates listed that aren’t already downloaded. In this case,
-although we only listed `rand` as a dependency, Cargo also grabbed other crates
-that `rand` depends on to work. After downloading the crates, Rust compiles
-them and then compiles the project with the dependencies available.
+หลังจากอัปเดต *registry* แล้ว Cargo จะตรวจสอบส่วน `[dependencies]`
+และดาวน์โหลดรายการ crate ใดก็ตามที่ยังไม่ได้ดาวน์โหลด
+ในกรณีนี้ แม้ว่าเราจะระบุ `rand` เป็น dependency Cargo ก็ยังดึงเอา crate อื่น ๆ ที่  
+`rand` ต้องการมาด้วย หลังจากดาวน์โหลด crate มาแล้ว Rust จะคอมไพล์ crate ทั้งหมดนี้
+จากนั้นจึงจะคอมไพล์โปรเจกต์ด้วย dependency ที่มีอยู่
 
-If you immediately run `cargo build` again without making any changes, you
-won’t get any output aside from the `Finished` line. Cargo knows it has already
-downloaded and compiled the dependencies, and you haven’t changed anything
-about them in your *Cargo.toml* file. Cargo also knows that you haven’t changed
-anything about your code, so it doesn’t recompile that either. With nothing to
-do, it simply exits.
+หากคุณรัน `cargo build` อีกครั้งทันที โดยไม่ได้เปลี่ยนแปลงอะไร
+คุณจะไม่ได้ผลลัพธ์ใด ๆ นอกจากบรรทัด `Finished` เพราะ Cargo 
+ทราบว่าได้ดาวน์โหลด และคอมไพล์ dependency เรียบร้อยแล้ว
+และคุณไม่ได้เปลี่ยนแปลงอะไรเกี่ยวกับ dependency ในไฟล์ *Cargo.toml* ของคุณ
+Cargo ยังทราบอีกว่าคุณไม่ได้เปลี่ยนแปลงอะไรเกี่ยวกับโค้ดของคุณ
+ดังนั้นจึงไม่จำเป็นต้องคอมไพล์ซ้ำอีกครั้ง เมื่อไม่มีอะไรต้องทำมันจึงแค่จบการทำงาน
 
-If you open the *src/main.rs* file, make a trivial change, and then save it and
-build again, you’ll only see two lines of output:
+หากคุณเปิดไฟล์ *src/main.rs* ทำการเปลี่ยนแปลงเล็กน้อยและบันทึก
+จากนั้นทำการคอมไพล์อีกครั้ง คุณจะเห็นเพียงผลลัพธ์สองบรรทัดดังนี้:
 
 <!-- manual-regeneration
 cd listings/ch02-guessing-game-tutorial/listing-02-02/
@@ -424,9 +416,10 @@ $ cargo build
     Finished dev [unoptimized + debuginfo] target(s) in 2.53 secs
 ```
 
-These lines show that Cargo only updates the build with your tiny change to the
-*src/main.rs* file. Your dependencies haven’t changed, so Cargo knows it can
-reuse what it has already downloaded and compiled for those.
+บรรทัดเหล่านี้แสดงให้เห็นว่า Cargo นั้นจะทำการคอมไพล์เพียงโค้ดของคุณเท่านั้น 
+ซึ่งได้มีการเปลี่ยนแปลงเล็กน้อยในไฟล์ *src/main.rs* ในขณะที่ dependency 
+ของคุณไม่มีการเปลี่ยนแปลง Cargo จึงสามารถนำ dependency เหล่านี้ 
+ที่ได้ดาวน์โหลดและคอมไพล์ไว้แล้วมาใช้ซ้ำได้ 
 
 #### Ensuring Reproducible Builds with the *Cargo.lock* File
 
