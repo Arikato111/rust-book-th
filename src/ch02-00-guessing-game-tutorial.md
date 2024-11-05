@@ -421,36 +421,32 @@ $ cargo build
 ของคุณไม่มีการเปลี่ยนแปลง Cargo จึงสามารถนำ dependency เหล่านี้ 
 ที่ได้ดาวน์โหลดและคอมไพล์ไว้แล้วมาใช้ซ้ำได้ 
 
-#### Ensuring Reproducible Builds with the *Cargo.lock* File
+#### การรับประกันการคอมไพล์ซ้ำด้วยไฟล์ *Cargo.lock*
 
-Cargo has a mechanism that ensures you can rebuild the same artifact every time
-you or anyone else builds your code: Cargo will use only the versions of the
-dependencies you specified until you indicate otherwise. For example, say that
-next week version 0.8.6 of the `rand` crate comes out, and that version
-contains an important bug fix, but it also contains a regression that will
-break your code. To handle this, Rust creates the *Cargo.lock* file the first
-time you run `cargo build`, so we now have this in the *guessing_game*
-directory.
+Cargo มีกลไกที่ช่วยให้คุณมั่นใจได้ว่า เมื่อคุณหรือใครก็ตามคอมไพล์โค้ดซ้ำอีกครั้งจะได้ผลลัพธ์เหมือนเดิม:
+Cargo จะใช้เฉพาะเวอร์ชั่นของ dependency ที่คุณระบุไว้เท่านั้น จนกว่าคุณจะระบุเป็นอย่างอื่น
+ตัวอย่างเช่น สมมติว่าสัปดาห์หน้าเวอร์ชั่น 0.8.6 ของ crate `rand` ได้รับการเผยแพร่
+และเวอร์ชั่นดังกล่าวมีการแก้ไขจุดบกพร่องที่สำคัญ แต่ยังมีข้อผิดพลาดซ้ำซ้อนที่จะทำให้โค้ดของคุณเสียหาย
+เพื่อรับมือกับปัญหานี้ Rust จะสร้างไฟล์ *Cargo.lock* ในครั้งแรกที่คุณรัน `cargo build`
+ดังนั้น ตอนนี้เรามีไฟล์นี้อยู่ในโฟลเดอร์ *guessing_game* แล้ว
 
-When you build a project for the first time, Cargo figures out all the versions
-of the dependencies that fit the criteria and then writes them to the
-*Cargo.lock* file. When you build your project in the future, Cargo will see
-that the *Cargo.lock* file exists and will use the versions specified there
-rather than doing all the work of figuring out versions again. This lets you
-have a reproducible build automatically. In other words, your project will
-remain at 0.8.5 until you explicitly upgrade, thanks to the *Cargo.lock* file.
-Because the *Cargo.lock* file is important for reproducible builds, it’s often
-checked into source control with the rest of the code in your project.
+เมือคุณคอมไพล์โปรเจกต์เป็นครั้งแรก Cargo จะค้นหาเวอร์ชั่นทั้งหมดของ dependency ที่ตรงตามเกณฑ์
+จากนั้นเขียนทั้งหมดลงในไฟล์ *Cargo.lock* เมือคุณคอมไพล์โปรเจกต์ของคุณในอนาคต
+Cargo จะเห็นว่ามีไฟล์ *Cargo.lock* อยู่ และจะใช้เวอร์ชั่นที่ระบุไว้ในไฟล์นี้
+แทนที่จะทำการค้นหาเวอร์ชั่นของ dependency ซ้ำอีกครั้ง
+วิธีนี้จะช่วยให้คุณคอมไพล์ซ้ำได้ได้โดยอัตโนมัติ
+กล่าวอีกนัยหนึ่ง โปรเจกต์ของคุณจะยังคงอยู่ในเวอร์ชั่น 0.8.5 จนกว่าคุณจะอัปเกรดโดยชัดเจน
+ขอบคุณไฟล์ *Cargo.lock* เนื่องจากไฟล์ *Cargo.lock* มีความสำคัญสำหรับการคอมไพล์ซ้ำ
+จึงมักถูกเพิ่มเข้าไปในระบบควบคุมเวอร์ชั่นพร้อมกับโค้ดส่วนอื่น ๆ ในโปรเจกต์ของคุณ 
 
-#### Updating a Crate to Get a New Version
+#### การอัปเดต crate เพื่อรับเวอร์ชั่นใหม่
 
-When you *do* want to update a crate, Cargo provides the command `update`,
-which will ignore the *Cargo.lock* file and figure out all the latest versions
-that fit your specifications in *Cargo.toml*. Cargo will then write those
-versions to the *Cargo.lock* file. In this case, Cargo will only look for
-versions greater than 0.8.5 and less than 0.9.0. If the `rand` crate has
-released the two new versions 0.8.6 and 0.9.0, you would see the following if
-you ran `cargo update`:
+เมื่อคุณ*ต้องการ*อัปเดต crate Cargo ได้เตรียมคำสั่ง `update` ซึ่งจะไม่สนใจไฟล์ *Cargo.lock*
+และทำการค้นหาเวอร์ชั่นล่าสุดที่ตรงตามเงื่อนไขใน *Cargo.toml*
+จากนั้น Cargo จะทำการเขียนเวอร์ชั่นเหล่านั้นลงบนไฟล์ *Cargo.lock*
+ในกรณีนี้ Cargo จะมองหาเวอร์ชั่นที่สูงกว่า 0.8.5 และต่ำกว่า 0.9.0 เท่านั้น
+หาก crate `rand` มีการเผยแพร่สองเวอร์ชั่นคือ 0.8.6 และ 0.9.0
+และคุณรันคำสั่ง `cargo update` คุณจะเห็นผลลัพธ์ดังต่อไปนี้:
 
 <!-- manual-regeneration
 cd listings/ch02-guessing-game-tutorial/listing-02-02/
@@ -464,25 +460,23 @@ $ cargo update
     Updating rand v0.8.5 -> v0.8.6
 ```
 
-Cargo ignores the 0.9.0 release. At this point, you would also notice a change
-in your *Cargo.lock* file noting that the version of the `rand` crate you are
-now using is 0.8.6. To use `rand` version 0.9.0 or any version in the 0.9.*x*
-series, you’d have to update the *Cargo.toml* file to look like this instead:
+Cargo ไม่สนใจเวอร์ชั่น 0.9.0 ในจุดนี้ คุณจะสังเกตเห็นการเปลี่ยนแปลงในไฟล์ *Cargo.lock* ของคุณว่า
+เวอร์ชั่นของ crate `rand` ที่คุณกำลังใช้คือ 0.8.6
+หากต้องการใช้ `rand` เวอร์ชั่น 0.9.0 หรือเวอร์ชั่นใด ๆ ในชุด 0.9.*x*
+คุณจะต้องแก้ไขไฟล์ *Cargo.toml* ให้เป็นดังนี้:
 
 ```toml
 [dependencies]
 rand = "0.9.0"
 ```
 
-The next time you run `cargo build`, Cargo will update the registry of crates
-available and reevaluate your `rand` requirements according to the new version
-you have specified.
+ครั้งถัดไปที่คุณรัน `cargo build` Cargo จะอัปเดต registry ของ crate ที่มีอยู่
+และประเมินความต้องการของ `rand` ตามเวอร์ชั่นใหม่ที่คุณระบุ
 
-There’s a lot more to say about [Cargo][doccargo]<!-- ignore --> and [its
-ecosystem][doccratesio]<!-- ignore -->, which we’ll discuss in Chapter 14, but
-for now, that’s all you need to know. Cargo makes it very easy to reuse
-libraries, so Rustaceans are able to write smaller projects that are assembled
-from a number of packages.
+มีเรื่องอื่นๆ มากมายที่จะพูดเกี่ยวกับ [Cargo][doccargo] และ [ecosystem ของมัน][doccratesio]
+ซึ่งเราจะกล่าวถึงในบทที่ 14 แต่ในตอนนี้ นั่นคือทั้งหมดที่คุณจำเป็นต้องรู้ 
+Cargo จะทำให้การนำไลบรารีกลับมาใช้ใหม่เป็นเรื่องที่ง่ายมาก
+ดังนั้น Rustaceans จึงสามารถเขียนโปรเจกต์ขนาดเล็กที่ประกอบขึ้นจากแพ็กเก็จต่าง ๆ ได้
 
 ### Generating a Random Number
 
