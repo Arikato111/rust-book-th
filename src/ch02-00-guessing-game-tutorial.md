@@ -478,10 +478,10 @@ rand = "0.9.0"
 Cargo จะทำให้การนำไลบรารีกลับมาใช้ใหม่เป็นเรื่องที่ง่ายมาก
 ดังนั้น Rustaceans จึงสามารถเขียนโปรเจกต์ขนาดเล็กที่ประกอบขึ้นจากแพ็กเก็จต่าง ๆ ได้
 
-### Generating a Random Number
+### การสร้างตัวเลขสุ่ม
 
-Let’s start using `rand` to generate a number to guess. The next step is to
-update *src/main.rs*, as shown in Listing 2-3.
+มาเริ่มใช้ `rand` ในการสุ่มเลขเพื่อทายกัน
+ขั้นตอนถัดไปคือการเพิ่มโค้ดลงใน *src/main.rs* ดังที่แสดงในรายการ 2-3
 
 <Listing number="2-3" file-name="src/main.rs" caption="Adding code to generate a random number">
 
@@ -491,35 +491,27 @@ update *src/main.rs*, as shown in Listing 2-3.
 
 </Listing>
 
-First we add the line `use rand::Rng;`. The `Rng` trait defines methods that
-random number generators implement, and this trait must be in scope for us to
-use those methods. Chapter 10 will cover traits in detail.
+ขั้นแรก เราเพิ่มบรรทัด `use rand::Rng;` โดย trait `Rng` จะประกาศ method ที่ตัวสร้างตัวเลขสุ่มนำไปใช้
+และ trait นี้ต้องอยู่ในขอบเขตเดียวกัน เพื่อให้เราสามารถใช้ method เหล่านั้นได้ บทที่ 10 จะคลอบคลุมถึงรายละเอียดเกี่ยวกับ trait
 
-Next, we’re adding two lines in the middle. In the first line, we call the
-`rand::thread_rng` function that gives us the particular random number
-generator we’re going to use: one that is local to the current thread of
-execution and is seeded by the operating system. Then we call the `gen_range`
-method on the random number generator. This method is defined by the `Rng`
-trait that we brought into scope with the `use rand::Rng;` statement. The
-`gen_range` method takes a range expression as an argument and generates a
-random number in the range. The kind of range expression we’re using here takes
-the form `start..=end` and is inclusive on the lower and upper bounds, so we
-need to specify `1..=100` to request a number between 1 and 100.
+ถัดไป เราจะเพิ่มสองบรรทัดตรงกลาง ในบรรทัดแรก เราจะเรียกใช้ฟังก์ชั่น `rand::thread_rng` 
+เพื่อสร้างตัวสุ่มเลขที่เราจะต้องใช้: ตัวสร้างเลขสุ่มนั้นจะอยู่ในเธรดปัจจุบันที่กำลังทำงาน และถูกกำหนดโดยระบบปฏิบัติการ
+จากนั้นเราจะเรียก method `gen_range` จากตัวสร้างเลขสุ่ม method นี้ถูกประกาศโดย trait `Rng`
+ที่เราเพิ่มเข้ามาในขอบเขตด้วยบรรทัด `use rand::Rng;`
+โดย `gen_range` รับช่วงตัวเลขขอบเขตที่เป็นไปได้ด้วย argument 
+และสร้างตัวเลขสุ่มภายในช่วงขอบเขตนั้น ขอบเขตของค่าที่เราใช้นี้มีรูปแบบ `start..=end`
+และรวมถึงขอบเขตล่างและบน ดังนั้นเราจึงจำเป็นต้องระบุ `1..=100` เพื่อขอจำนวนระหว่าง 1 ถึง 100
 
-> Note: You won’t just know which traits to use and which methods and functions
-> to call from a crate, so each crate has documentation with instructions for
-> using it. Another neat feature of Cargo is that running the `cargo doc
-> --open` command will build documentation provided by all your dependencies
-> locally and open it in your browser. If you’re interested in other
-> functionality in the `rand` crate, for example, run `cargo doc --open` and
-> click `rand` in the sidebar on the left.
+> หมายเหตุ: คุณจะไม่เพียงรู้ว่าต้องใช้ trait ไหน method ไหน และฟังก์ชั่นไหนจาก crate
+> ดังนั้นแต่ละ crate จะมีเอกสารคู่มือประกอบการใช้งาน คุณสมบัติเจ๋ง ๆ อีกอย่างหนึ่งของ Cargo
+> คือการรันคำสั่ง `cargo doc --open` ซึ่งจะสร้างเอกสารคู่มือจากทุก dependency ของคุณบนเครื่อง
+> และเปิดเอกสารบนเบราว์เซอร์ของคุณ ตัวอย่างเช่น หากคุณสนใจฟังก์ชั่นอื่น ๆ ใน crate `rand`
+> รันคำสั่ง `cargo doc --open` และคลิก `rand` ในแถบด้านซ้าย
 
-The second new line prints the secret number. This is useful while we’re
-developing the program to be able to test it, but we’ll delete it from the
-final version. It’s not much of a game if the program prints the answer as soon
-as it starts!
+บรรทัดใหม่ลำดับที่สองจะแสดงตัวเลขลับจากการสุ่ม ซึ่งมีประโยชน์ในขณะที่เรากำลังพัฒนาโปรแกรมเพื่อทดสอบ
+แต่เราจะลบมันออกในเวอร์ชั่นสุดท้าย คงจะไม่ใช่เกมสักเท่าไหร่หากโปรแกรมแสดงคำตอบทันทีที่เริ่มทำงาน
 
-Try running the program a few times:
+ลองรันโปรแกรมสักสองสามครั้ง:
 
 <!-- manual-regeneration
 cd listings/ch02-guessing-game-tutorial/listing-02-03/
@@ -550,8 +542,7 @@ Please input your guess.
 You guessed: 5
 ```
 
-You should get different random numbers, and they should all be numbers between
-1 and 100. Great job!
+คุณควรจะได้รับตัวเลขสุ่มที่ต่างกัน และทั้งหมดควรเป็นตัวเลขระหว่าง 1 ถึง 100 เยี่ยมมาก!
 
 ## Comparing the Guess to the Secret Number
 
