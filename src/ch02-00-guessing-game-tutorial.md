@@ -544,11 +544,10 @@ You guessed: 5
 
 คุณควรจะได้รับตัวเลขสุ่มที่ต่างกัน และทั้งหมดควรเป็นตัวเลขระหว่าง 1 ถึง 100 เยี่ยมมาก!
 
-## Comparing the Guess to the Secret Number
+## การเปรียบเทียบตัวเลขทายและตัวเลขที่ถูกต้อง
 
-Now that we have user input and a random number, we can compare them. That step
-is shown in Listing 2-4. Note that this code won’t compile just yet, as we will
-explain.
+ตอนนี้เรามี input ของผู้ใช้และตัวเลขสุ่มแล้ว เราสามารถเปรียบเทียบมันได้
+ขั้นตอนดังกล่าวแสดงอยู่ในรายการ 2-4 โปรดทราบว่าโค้ดนี้จะยังไม่คอมไพล์ตามที่เราได้อธิบาย
 
 <Listing number="2-4" file-name="src/main.rs" caption="Handling the possible return values of comparing two numbers">
 
@@ -558,44 +557,39 @@ explain.
 
 </Listing>
 
-First we add another `use` statement, bringing a type called
-`std::cmp::Ordering` into scope from the standard library. The `Ordering` type
-is another enum and has the variants `Less`, `Greater`, and `Equal`. These are
-the three outcomes that are possible when you compare two values.
+ขั้นแรก เราเพิ่มคำสั่ง `use` อีกบรรทัด โดยนำเข้าประเภทตัวแปรที่เรียกว่า `std::cmp::Ordering`
+เข้ามายังขอบเขตจากไลบรารีมาตรฐาน ประเภทตัวแปร `Ordering` เป็น enum อีกหนึ่งแบบ
+และมี variant คือ `Less`, `Greater`, และ `Equal` ซึ่งก็คือผลลัพธ์สามประการที่เป็นไปได้
+เมื่องคุณเปรียบเทียบค่าสองค่า
 
-Then we add five new lines at the bottom that use the `Ordering` type. The
-`cmp` method compares two values and can be called on anything that can be
-compared. It takes a reference to whatever you want to compare with: here it’s
-comparing `guess` to `secret_number`. Then it returns a variant of the
-`Ordering` enum we brought into scope with the `use` statement. We use a
-[`match`][match]<!-- ignore --> expression to decide what to do next based on
-which variant of `Ordering` was returned from the call to `cmp` with the values
-in `guess` and `secret_number`.
+จากนั้นเราจะเพิ่มบรรทัดใหม่ห้าบรรทัดที่ด้านล่าง ซึ่งใช้งานประเภทตัวแปร `Ordering` ที่มี method `cmp`
+ที่สามารถเปรียบเทียบค่าสองค่า และสามารถเรียกใช้กับอะไรก็ได้ที่สามารถเปรียบเทียบได้
+โดยมันจะอ้างถึงสิ่งที่คุณเปรียบเทียบ: ในที่นี้จะเป็นการเปรียบเทียบ `guess` กับ `secret_number`
+จากนั้น return ค่า variant ของ enum `Ordering` ที่เราได้นำเข้ามายังขอบเขตผ่านคำสั่ง `use`
+จากนั้นเราใช้ [`match`][match] expression เพื่อตัดสินใจว่าจะทำอย่างไรต่อไป
+โดยขึ้นอยู่กับค่า variant ของ `Ordering` ที่ถูก return จากการเรียกใช้ `cmp` 
+กับค่าใน `guess` และ `secret_number`
 
-A `match` expression is made up of *arms*. An arm consists of a *pattern* to
-match against, and the code that should be run if the value given to `match`
-fits that arm’s pattern. Rust takes the value given to `match` and looks
-through each arm’s pattern in turn. Patterns and the `match` construct are
-powerful Rust features: they let you express a variety of situations your code
-might encounter and they make sure you handle them all. These features will be
-covered in detail in Chapter 6 and Chapter 19, respectively.
+`match` expression ประกอบด้วยแขน และแขนประกอบด้วย*รูป*แบบที่จะจับคู่กัน
+และโค้ดที่ควรจะถูกรันเมื่อค่าที่กำหนดตรงกับรูปแบบของแขน Rust จะนำค่าที่กำหนดให้กับ `match`
+และตรวจสอบรูปแบบของแขนตามลำดับ รูปแบบและโครงสร้าง `match` เป็นคุณสมบัติที่ทรงพลัง:
+ซึ่งช่วยให้คุณสามารถแสดงสถานการณ์ต่าง ๆ ที่โค้ดของคุณอาจพบเจอ และทำให้มั่นใจว่าคุณจะจัดการกับเหตุการณ์เหล่านั้นได้
+คุณสมบัติเหล่านี้จะถูกกล่าวถึงโดยละเอียดในบทที่ 6 และบทที่ 19 ตามลำดับ
 
-Let’s walk through an example with the `match` expression we use here. Say that
-the user has guessed 50 and the randomly generated secret number this time is
-38.
+มาดูตัวอย่างด้วย `match` expression ที่เราใช้ที่นี่
+สมมติว่าผู้ใช้ทายหมายเลข 50 และหมายเลขที่สร้างขึ้นแบบสุ่มในครั้งนี้คือ 38
 
-When the code compares 50 to 38, the `cmp` method will return
-`Ordering::Greater` because 50 is greater than 38. The `match` expression gets
-the `Ordering::Greater` value and starts checking each arm’s pattern. It looks
-at the first arm’s pattern, `Ordering::Less`, and sees that the value
-`Ordering::Greater` does not match `Ordering::Less`, so it ignores the code in
-that arm and moves to the next arm. The next arm’s pattern is
-`Ordering::Greater`, which *does* match `Ordering::Greater`! The associated
-code in that arm will execute and print `Too big!` to the screen. The `match`
-expression ends after the first successful match, so it won’t look at the last
-arm in this scenario.
+เมื่อโค้ดทำการเปรียบเทียบ 50 กับ 38 method `cmp` จะ return
+ค่า `Ordering::Greater` เพราะ 50 นั้นมากกว่า 38 `match` expression จะได้รับค่า
+`Ordering::Greater` และเริ่มต้นตรวจสอบรูปแบบของแต่ละแขน
+โดยจะเริ่มดูที่แขนแรก `Ordering::Less` และตรวจสอบว่าค่า `Ordering::Greater` 
+นั้นไม่ตรงกับ `Ordering::Less` ดังนั้นจึงไม่สนใจโค้ดในแขนนั้น และย้ายไปที่แขนถัดไป
+รูปแบบของแขนลำดับถัดไปคือ `Ordering::Greater` ซึ่ง*ตรง*กับ `Ordering::Greater` !
+ดังนั้นโค้ดที่เกี่ยวข้องในแขนนี้จะทำงาน และแสดงผล `Too big!` ไปยังหน้าจอ
+`match` expression จบการทำงานหลังจากรูปแบบตรงกันในครั้งแรก 
+ดังนั้นมันจะไม่ตรวจสอบแขนสุดท้ายในสถานการณ์นี้
 
-However, the code in Listing 2-4 won’t compile yet. Let’s try it:
+อย่างไรก็ตาม โค้ดในรายการที่ 2-4 จะยังไม่สามารถคอมไพล์ มาลองดูกัน:
 
 <!--
 The error numbers in this output should be that of the code **WITHOUT** the
