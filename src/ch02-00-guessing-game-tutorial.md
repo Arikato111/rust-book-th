@@ -600,28 +600,28 @@ anchor or snip comments
 {{#include ../listings/ch02-guessing-game-tutorial/listing-02-04/output.txt}}
 ```
 
-The core of the error states that there are *mismatched types*. Rust has a
-strong, static type system. However, it also has type inference. When we wrote
-`let mut guess = String::new()`, Rust was able to infer that `guess` should be
-a `String` and didn’t make us write the type. The `secret_number`, on the other
-hand, is a number type. A few of Rust’s number types can have a value between 1
-and 100: `i32`, a 32-bit number; `u32`, an unsigned 32-bit number; `i64`, a
-64-bit number; as well as others. Unless otherwise specified, Rust defaults to
-an `i32`, which is the type of `secret_number` unless you add type information
-elsewhere that would cause Rust to infer a different numerical type. The reason
-for the error is that Rust cannot compare a string and a number type.
+ใจความโดยสรุปของข้อผิดพลาดคือ มี*ประเภทตัวแปรที่ไม่ตรงกัน*
+Rust มีระบบประเภทตัวแปรคงที่ที่แข็งแกร่ง อย่างไรก็ตาม มันก็ยังมีการอนุมานประเภทตัวแปร 
+เมื่อเราเขียน `let mut guess = String::new()`
+Rust สามารถอนุมานได้ว่า `guess` นั้นควรเป็น `String` โดยไม่จำเป็นต้องระบุประเภท
+ในทางกลับกัน `secret_number` คือประเภทตัวเลข 
+ประเภทตัวแปรของ Rust บางส่วนที่สามารถมีค่าระหว่าง 1 ถึง 100: `i32` คือตัวเลข 32 บิต;
+`u32` คือตัวเลขแบบ unsigned 32 บิต; `i64` คือตัวเลข 64 บิต; และอื่น ๆ 
+โดยหากไม่ได้ระบุไว้ว่าเป็นประเภทใด Rust จะกำหนดโดยค่าเริ่มต้นเป็น `i32` ซึ่งก็คือประเภทของ `secret_number`
+เว้นแต่ว่าจะมีข้อมูลเกี่ยวกับประเภทตัวแปรที่ทำให้ Rust อนุมานเป็นประเภทตัวแปรอื่น
+สาเหตุของข้อผิดพลาดคือ Rust ไม่สามารถเปรียบเทียบประเภท string กับตัวเลขได้
 
-Ultimately, we want to convert the `String` the program reads as input into a
-number type so we can compare it numerically to the secret number. We do so by
-adding this line to the `main` function body:
+ท้ายสุด เราต้องการแปลง `String` ที่โปรแกรมอ่านเป็น input ไปเป็นประเภทตัวเลข
+เพื่อให้เราสามารถนำมันไปเปรียบเทียบกับตัวเลขสุ่มได้
+โดยเราจะเพิ่มบรรทัดนี้ไปที่ภายในฟังก์ชั่น `main`: 
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">ชื่อไฟล์: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch02-guessing-game-tutorial/no-listing-03-convert-string-to-number/src/main.rs:here}}
 ```
 
-The line is:
+บรรทัดที่ว่าคือ:
 
 ```rust,ignore
 let guess: u32 = guess.trim().parse().expect("Please type a number!");
