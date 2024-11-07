@@ -627,53 +627,49 @@ Rust สามารถอนุมานได้ว่า `guess` นั้น
 let guess: u32 = guess.trim().parse().expect("Please type a number!");
 ```
 
-We create a variable named `guess`. But wait, doesn’t the program already have
-a variable named `guess`? It does, but helpfully Rust allows us to shadow the
-previous value of `guess` with a new one. *Shadowing* lets us reuse the `guess`
-variable name rather than forcing us to create two unique variables, such as
-`guess_str` and `guess`, for example. We’ll cover this in more detail in
-[Chapter 3][shadowing]<!-- ignore -->, but for now, know that this feature is
-often used when you want to convert a value from one type to another type.
+เราสร้างตัวแปรชื่อ `guess` แต่เดี๋ยวก่อน โปรแกรมมีตัวแปรชื่อ `guess` อยู่แล้วไม่ใช่หรือ?
+ใช่แล้ว แต่ Rust ที่มีประโยชน์ช่วยให้เราสามารถบดบังค่าเดิมของ `guess` ด้วยค่าใหม่ได้
+*การบดบัง*ช่วยให้เราสามารถนำชื่อตัวแปร `guess` มาใช้ซ้ำได้ แทนที่จะต้องสร้างตัวแปรสองตัวที่ไม่ซ้ำกัน
+เช่น `guess_str` และ `guess` เราจะกล่าวถึงเรื่องนี้โดยละเอียดใน [บทที่ 3][shadowing]
+แต่ในตอนนี้ รู้ไว้ว่าคุณสมบัตินี้มักถูกใช้เมื่อคุณต้องการแปลงค่าจากชนิดหนึ่งไปยังอีกชนิดหนึ่ง
 
-We bind this new variable to the expression `guess.trim().parse()`. The `guess`
-in the expression refers to the original `guess` variable that contained the
-input as a string. The `trim` method on a `String` instance will eliminate any
-whitespace at the beginning and end, which we must do to be able to compare the
-string to the `u32`, which can only contain numerical data. The user must press
-<kbd>enter</kbd> to satisfy `read_line` and input their guess, which adds a
-newline character to the string. For example, if the user types <kbd>5</kbd> and
-presses <kbd>enter</kbd>, `guess` looks like this: `5\n`. The `\n` represents
-“newline.” (On Windows, pressing <kbd>enter</kbd> results in a carriage return
-and a newline, `\r\n`.) The `trim` method eliminates `\n` or `\r\n`, resulting
-in just `5`.
+<!-- warn: "carriage return" ไม่รู้ว่าคำไทยควรจะแปลว่าอะไร หรือเขาเรียกกันว่าอะไร
+            \r คือ ทำให้ cursor กลับไปจุดเริ่มต้น หรือก็คือซ้ายสุด
+            \n คือ ขึ้นบรรทัดใหม่ -->
 
-The [`parse` method on strings][parse]<!-- ignore --> converts a string to
-another type. Here, we use it to convert from a string to a number. We need to
-tell Rust the exact number type we want by using `let guess: u32`. The colon
-(`:`) after `guess` tells Rust we’ll annotate the variable’s type. Rust has a
-few built-in number types; the `u32` seen here is an unsigned, 32-bit integer.
-It’s a good default choice for a small positive number. You’ll learn about
-other number types in [Chapter 3][integers]<!-- ignore -->.
+เรากำหนดค่าตัวแปรใหม่ด้วย `guess.trim().parse()`
+โดย `guess` ในโค้ดนี้อ้างถึงตัวแปร `guess` ดั้งเดิมที่มี input เป็น string
+ส่วน method `trim` บนอินสแตนซ์ `String` จะสบช่องว่างที่จุดเริ่มต้นและจุดสิ้นสุด
+ซึ่งเราต้องทำเพื่อให้สามารถเปรียบเทียบ string กับ `u32` ที่สามารถมีได้เฉพาะข้อมูลตัวเลขเท่านั้น
+ผู้ใช้ต้องกด <kbd>enter</kbd> เพื่อให้เป็นไปตาม `read_line` และป้อนการคาดเดา
+ซึ่งมีผลทำให้มีตัวอักขระบรรทัดใหม่เพิ่มไปยัง string ตัวอย่างเช่น
+หากผู้ใช้พิมพ์ <kbd>5</kbd> และกด <kbd>enter</kbd> `guess` จะเป็นดังนี้:
+`5\n` โดย `\n` นั้นหมายถึง “บรรทัดใหม่” (บน Windows การกด <kbd>enter</kbd> จะส่งผลให้เกิด carriage return
+และบรรทัดใหม่, `\r\n`) method `trim` จะลบ `\n` หรือ `\r\n` ส่งผลให้เหลือเพียง `5`
 
-Additionally, the `u32` annotation in this example program and the comparison
-with `secret_number` means Rust will infer that `secret_number` should be a
-`u32` as well. So now the comparison will be between two values of the same
-type!
+[ method `parse` บน strings][parse] จะทำการแปลง string เป็นประเภทอื่น
+ในที่นี้เราจะใช้มันเพื่อแปลงจาก string ไปเป็นตัวเลข เราจำเป็นต้องบอกประเภทตัวเลขที่ชัดเจนกับ Rust
+โดยใช้ `let guess: u32` เครื่องหมายทวิภาค (`:`) ถัดจาก `guess` บอก Rust
+ว่าเราจะกำหนดประเภทตัวแปรใด Rust มีประเภทตัวเลขในตัวเล็กน้อย ซึ่ง `u32` ที่ได้เห็นไปนั้นคือ
+ตัวเลข unsigned 32 บิต มันเป็นตัวเลือกเริ่มต้นที่ดีสำหรับจำนวนเต็มบวกขนาดเล็ก
+คุณจะได้เรียนรู้เกี่ยวกับประเภทของตัวเลขอื่น ๆ ใน [บทที่ 3][integers]
 
-The `parse` method will only work on characters that can logically be converted
-into numbers and so can easily cause errors. If, for example, the string
-contained `A👍%`, there would be no way to convert that to a number. Because it
-might fail, the `parse` method returns a `Result` type, much as the `read_line`
-method does (discussed earlier in [“Handling Potential Failure with
-`Result`”](#handling-potential-failure-with-result)<!-- ignore-->). We’ll treat
-this `Result` the same way by using the `expect` method again. If `parse`
-returns an `Err` `Result` variant because it couldn’t create a number from the
-string, the `expect` call will crash the game and print the message we give it.
-If `parse` can successfully convert the string to a number, it will return the
-`Ok` variant of `Result`, and `expect` will return the number that we want from
-the `Ok` value.
+นอกจากนี้ การระบุ `u32` ในโปรแกรมตัวอย่างและการเปรียบเทียบกับ `secret_number` 
+ยังหมายถึง Rust จะอนุมานว่า `secret_number` ควรจะเป็น `u32` เช่นกัน
+ตอนนี้การเปรียบเทียบอยู่ระหว่างสองค่าของประเภทตัวแปรเดียวกัน!
 
-Let’s run the program now:
+method `parse` จะใช้ได้เฉพาะกับอักขระที่สามารถแปลงเป็นตัวเลขได้ตามตรรกะเท่านั้น
+และอาจทำให้เกิดข้อผิดพลาดได้ง่าย ตัวอย่างเช่น หาก string มี `A👍%` รวมอยู่ด้วย
+มันจะไม่มีทางแปลงเป็นตัวเลข เนื่องจากอาจล้มเหลว method `parse` จึง return ประเภท `Result`
+คล้ายกับที่ `read_line` ทำ (อธิบายไว้ก่อนหน้านี้ใน [“Handling Potential Failure with
+`Result`”](#การจัดการกับความลมเหลวทีอาจจะเกิดขึนดวย-result))
+เราจะปฏิบัติต่อ `Result` นี้ในลักษณะเดียวกันโดยใช้ method `expect` อีกครั้ง
+หาก `parse` ทำการ return `Err` ซึ่งเป็น variant ของ 
+`Result` เนื่องจากไม่สามารถสร้างตัวเลขจาก string ได้ `expect` จะทำให้เกมหยุดทำงานและแสดงข้อความที่กำหนด
+หาก `parse` สามารถแปลง string เป็นตัวเลขได้สำเร็จ มันจะ return `Ok` ซึ่งเป็น variant ของ `Result`
+และ `expect` จะ return ตัวเลขที่เราต้องการจากค่า `Ok`
+
+ตอนนี้มารันโปรแกรมกัน:
 
 <!-- manual-regeneration
 cd listings/ch02-guessing-game-tutorial/no-listing-03-convert-string-to-number/
@@ -694,13 +690,11 @@ You guessed: 76
 Too big!
 ```
 
-Nice! Even though spaces were added before the guess, the program still figured
-out that the user guessed 76. Run the program a few times to verify the
-different behavior with different kinds of input: guess the number correctly,
-guess a number that is too high, and guess a number that is too low.
+ทำได้ดี! แม้ว่าจะมีการเติมช่องว่างข้างหน้า guess แต่โปรแกรมก็ยังรู้ได้ว่าผู้ใช้ทาย 76
+รันโปรแกรมสองสามครั้งเพื่อตรวจสอบพฤติกรรมที่แตกต่างกันด้วย input ประเภทต่าง ๆ : เดาตัวเลขที่ถูกต้อง
+เดาตัวเลขที่สูงเกินไป และเดาตัวเลขที่ต่ำเกินไป
 
-We have most of the game working now, but the user can make only one guess.
-Let’s change that by adding a loop!
+ขณะนี้ส่วนใหญ่ของเกมทำงานได้แล้ว แต่ผู้ใช้สามารถทายได้เพียงครั้งเดียว มาแก้ไขด้วยการเพิ่มการวนซ้ำกัน!
 
 ## Allowing Multiple Guesses with Looping
 
