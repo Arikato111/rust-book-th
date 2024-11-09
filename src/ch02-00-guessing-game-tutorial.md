@@ -795,23 +795,14 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 จะแค่ return ค่า `num` ที่ `parse` นั้นสร้างขึ้นมาและนำไปใส่ไว้ในค่า `Ok` 
 จากนั้นตัวเลขนี้จะถูกกำหนดค่าลงในตัวแปร `guess` ตัวใหม่ที่เราได้สร้างขึ้น
 
-If `parse` is able to successfully turn the string into a number, it will
-return an `Ok` value that contains the resultant number. That `Ok` value will
-match the first arm’s pattern, and the `match` expression will just return the
-`num` value that `parse` produced and put inside the `Ok` value. That number
-will end up right where we want it in the new `guess` variable we’re creating.
+หาก `parse` ไม่สามารถแปลง string ไปเป็นตัวเลขได้ มันจะ return ค่า `Err` ซึ่งจะมีข้อมูลเกี่ยวกับ
+error รวมอยู่ในนั้นด้วย ค่า `Err` ไม่ตรงกับรูปแบบ `Ok(num)` ในแขนแรกของ `match` 
+แต่มันตรงกับรูปแบบ `Err(_)` ในแขนที่สอง ขีดเล้นใต้ `_` เป็นค่าที่รับทั้งหมด ในตัวอย่างนี้
+เรากำลังบอกว่าเราต้องการจับคู่ค่า `Err` ทั้งหมด ไม่ว่าค่าเหล่านั้นจะมีข้อมูลอะไรอยู่ภายในก็ตาม
+ดังนั้นโปรแกรมจะรันโค้ดในแขนที่สอง `continue` นี้บอกว่าให้โปรแกรมไปที่การวนซ้ำครั้งถัดไปของ `loop` และขอให้เดาอีกครั้ง
+ดังนั้นโปรแกรมจะไม่สนใจข้อผิดพลาดทั้งหมดที่อาจพบใน `parse` อย่างมีประสิทธิภาพ!
 
-If `parse` is *not* able to turn the string into a number, it will return an
-`Err` value that contains more information about the error. The `Err` value
-does not match the `Ok(num)` pattern in the first `match` arm, but it does
-match the `Err(_)` pattern in the second arm. The underscore, `_`, is a
-catchall value; in this example, we’re saying we want to match all `Err`
-values, no matter what information they have inside them. So the program will
-execute the second arm’s code, `continue`, which tells the program to go to the
-next iteration of the `loop` and ask for another guess. So, effectively, the
-program ignores all errors that `parse` might encounter!
-
-Now everything in the program should work as expected. Let’s try it:
+ตอนนี้ทุกอย่างในโปรแกรมควรจะทำงานได้ตามที่คาดไว้ มาลองดูกัน:
 
 <!-- manual-regeneration
 cd listings/ch02-guessing-game-tutorial/listing-02-05/
@@ -845,10 +836,9 @@ You guessed: 61
 You win!
 ```
 
-Awesome! With one tiny final tweak, we will finish the guessing game. Recall
-that the program is still printing the secret number. That worked well for
-testing, but it ruins the game. Let’s delete the `println!` that outputs the
-secret number. Listing 2-6 shows the final code.
+ยอดเยี่ยม! ด้วยการปรับแต่งเล็ก ๆ น้อย ๆ ในครั้งสุดท้าย เราจะสร้างเกมนี้ให้สำเร็จ
+จำได้ว่าโปรแกรมยังคงแสดงตัวเลขลับอยู่ มันใช้งานได้ดีสำหรับการทดสอบ แต่มันก็ทำลายเกม
+มาลบ `println!` ที่แสดงหมายเลขลับกัน! รายการที่ 2-6 จะแสดงโค้ดที่สำเร็จแล้ว
 
 <Listing number="2-6" file-name="src/main.rs" caption="Complete guessing game code">
 
@@ -858,17 +848,16 @@ secret number. Listing 2-6 shows the final code.
 
 </Listing>
 
-At this point, you’ve successfully built the guessing game. Congratulations!
+ถึงจุดนี้ คุณได้สร้างเกมทายตัวเลขสำเร็จแล้ว ยินดีด้วย!
 
-## Summary
+## สรุป
 
-This project was a hands-on way to introduce you to many new Rust concepts:
-`let`, `match`, functions, the use of external crates, and more. In the next
-few chapters, you’ll learn about these concepts in more detail. Chapter 3
-covers concepts that most programming languages have, such as variables, data
-types, and functions, and shows how to use them in Rust. Chapter 4 explores
-ownership, a feature that makes Rust different from other languages. Chapter 5
-discusses structs and method syntax, and Chapter 6 explains how enums work.
+โปรเจกต์นี้เป็นการลงมือปฏิบัติจริงเพื่อแนะนำให้คุณรู้จักกับแนวคิดใหม่ ๆ ของ Rust มากมาย:
+`let`, `match`, ฟังก์ชั่น, การใช้ crate ภายนอก และอื่น ๆ อีกมากมาย
+ในอีกไม่กี่บทต่อจากนี้คุณจะได้เรียนรู้เกี่ยวกับแนวคิดเหล่านี้โดยละเอียดมากขึ้น บทที่ 3 ครอบคลุมแนวคิดที่ภาษาโปรแกรมส่วนใหญ่มี
+เช่น ตัวแปร ชนิดข้อมูล และฟังก์ชั่น และแสดงวิธีการใช้งานใน Rust บทที่ 4 สำรวจเกี่ยวกับ ownership
+ซึ่งเป็นคุณสมบัติที่ทำให้ Rust แตกต่างจากภาษาโปรแกรมอื่น บทที่ 5 กล่าวถึง struct และไวยากรณ์ method
+และบทที่ 6 สำรวจเกี่ยวกับการทำงานของ enum
 
 [prelude]: https://doc.rust-lang.org/std/prelude/index.html
 [variables-and-mutability]: ch03-01-variables-and-mutability.html#ตัวแปรและความไมแนนอน
