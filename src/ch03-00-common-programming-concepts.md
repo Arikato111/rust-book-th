@@ -1,23 +1,22 @@
-# Common Programming Concepts
+# แนวคิดการเขียนโปรแกรมโดยทั่วไป
 
-This chapter covers concepts that appear in almost every programming language
-and how they work in Rust. Many programming languages have much in common at
-their core. None of the concepts presented in this chapter are unique to Rust,
-but we’ll discuss them in the context of Rust and explain the conventions
-around using these concepts.
+บทนี้ครอบคลุมแนวคิดที่ปรากฏในเกือบทุกภาษาโปรแกรม และวิธีที่แนวคิดเหล่านี้ทำงานใน Rust
+ภาษาโปรแกรมหลายภาษามีพื้นฐานที่เหมือนกันมาก 
+ไม่มีแนวคิดหลักการใดในบทนี้ที่มีเอกลักษณ์เฉพาะสำหรับ Rust
+แต่เราจะกล่าวถึงแนวคิดเหล่านั้นในบริบทของ Rust และอธิบายแบบแผนที่เกี่ยวกับแนวคิดเหล่านั้น
 
-Specifically, you’ll learn about variables, basic types, functions, comments,
-and control flow. These foundations will be in every Rust program, and learning
-them early will give you a strong core to start from.
+คุณจะได้เรียนรู้เกี่ยวกับ ตัวแปร, ประเภทตัวแปรพื้นฐาน, ฟังก์ชั่น, คอมเมนต์, และโฟลว์การควบคุม 
+โดยเฉพาะ พื้นฐานเหล่านี้จะอยู่ในทุก ๆ โปรแกรมของ Rust และการเรียนรู้สิ่งเหล่านี้ตั้งแต่เนิ่น ๆ 
+จะทำให้คุณมีพื้นฐานที่แน่นในการเริ่มต้น
 
-> #### Keywords
->
-> The Rust language has a set of *keywords* that are reserved for use by the
-> language only, much as in other languages. Keep in mind that you cannot use
-> these words as names of variables or functions. Most of the keywords have
-> special meanings, and you’ll be using them to do various tasks in your Rust
-> programs; a few have no current functionality associated with them but have
-> been reserved for functionality that might be added to Rust in the future. You
-> can find a list of the keywords in [Appendix A][appendix_a]<!-- ignore -->.
+> #### คีย์เวิร์ด
+> 
+> ภาษา Rust มีชุด *คีย์เวิร์ด* ที่สงวนไว้สำหรับใช้โดยภาษาเท่านั้น เช่นเดียวกับภาษาอื่น ๆ 
+> โปรดทราบว่าคุณไม่สามารถใช้คำเหล่านี้เป็นชื่อของตัวแปรหรือฟังก์ชั่นได้
+> คีย์เวิร์ดส่วนใหญ่มีความหมายพิเศษ และคุณจะใช้คีย์เวิร์ดเหล่านั้นเพื่อทำงานต่าง ๆ ในโปรแกรม 
+> Rust ของคุณ; บางส่วนไม่มีฟังก์ชั่นการใช้งานในปัจจุบันที่เกี่ยวข้อง 
+> แต่ถูกสงวนไว้สำหรับฟังก์ชั่นที่อาจเพิ่มเข้ามาในอนาคต คุณสามารถดูรายการของคีย์เวิร์ดได้ใน
+> [ภาคผนวก A][appendix_a]
+
 
 [appendix_a]: appendix-01-keywords.md
