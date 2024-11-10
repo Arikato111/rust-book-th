@@ -2,29 +2,28 @@
             แต่ก็แปลเป็นไทยไปเลย เพราะไม่ได้เขียนว่า mutable ตรง ๆ  -->
 ## ตัวแปรและความไม่แน่นอน
 
-As mentioned in the [“Storing Values with
-Variables”][storing-values-with-variables]<!-- ignore --> section, by default,
-variables are immutable. This is one of many nudges Rust gives you to write
-your code in a way that takes advantage of the safety and easy concurrency that
-Rust offers. However, you still have the option to make your variables mutable.
-Let’s explore how and why Rust encourages you to favor immutability and why
-sometimes you might want to opt out.
+อย่างที่ได้กล่าวไว้ในหัวข้อ [“การจัดเก็บค่าด้วยตัวแปร”][storing-values-with-variables]
+ตัวแปรจะเป็น immutable (ไม่เปลี่ยนแปลง) โดยค่าเริ่มต้น นี่เป็นหนึ่งในหลาย ๆ วิธีที่ Rust 
+ช่วยผลักดันคุณให้เขียนโค้ดที่มีความปลอดภัย และเหมาะกับการทำงานแบบขนาน (concurrency) ได้ง่ายขึ้น
+อย่างไรก็ตาม คุณยังคงสามารถเลือกที่จะทำให้ตัวแปรของคุณเป็น mutable (เปลี่ยนแปลงได้) ได้เช่นกัน
+มาสำรวจกันว่ายังไงและทำไม Rust จึงสนับสนุนการใช้ตัวแปรแบบ immutable 
+และทำไมบางครั้งคุณอาจต้องการตัวแปรแบบ mutable
 
-When a variable is immutable, once a value is bound to a name, you can’t change
-that value. To illustrate this, generate a new project called *variables* in
-your *projects* directory by using `cargo new variables`.
+เมื่อตัวแปรเป็น immutable หลังจากกำหนดค่าให้ตัวแปรในครั้งแรกแล้ว 
+คุณไม่สามารถเปลี่ยนค่านั้นได้อีก เพื่อแสดงให้เห็นถึงแนวคิดนี้ สร้างโปรเจกต์ใหม่ชื่อ *variables* 
+ในโฟลเดอร์ *projects* โดยใช้คำสั่ง `cargo new variables`
 
-Then, in your new *variables* directory, open *src/main.rs* and replace its
-code with the following code, which won’t compile just yet:
+จากนั้น ภายในโฟลเดอร์ *variables* เปิดไฟล์ *src/main.rs* 
+และแทนที่โค้ดเดิมทั้งหมดด้วยโค้ดดังต่อไปนี้ ซึ่งจะยังไม่สามารถคอมไพล์ได้:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">ชื่อไฟล์: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-01-variables-are-immutable/src/main.rs}}
 ```
 
-Save and run the program using `cargo run`. You should receive an error message
-regarding an immutability error, as shown in this output:
+บันทึกและรันโปรแกรมโดยใช้คำสั่ง `cargo run` คุณควรได้รับข้อความแสดงข้อผิดพลาดเกี่ยวกับ immutable
+ดังที่แสดงในผลลัพธ์นี้:
 
 ```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-01-variables-are-immutable/output.txt}}
@@ -189,5 +188,5 @@ can have.
 [comparing-the-guess-to-the-secret-number]:
 ch02-00-guessing-game-tutorial.html#comparing-the-guess-to-the-secret-number
 [data-types]: ch03-02-data-types.html#data-types
-[storing-values-with-variables]: ch02-00-guessing-game-tutorial.html#storing-values-with-variables
+[storing-values-with-variables]: ch02-00-guessing-game-tutorial.html#การจัดเกบคาดวยตัวแปร
 [const-eval]: ../reference/const_eval.html
