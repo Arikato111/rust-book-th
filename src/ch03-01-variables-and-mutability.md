@@ -67,26 +67,24 @@ Rustaceans ที่มีประสบการณ์ก็ยังคงไ
 ท้ายที่สุดแล้วการตัดสินใจว่าจะใช้ mutable 
 หรือไม่นั้นขึ้นอยู่กับคุณและขึ้นอยู่กับสิ่งที่คุณคิดว่าชัดเจนที่สุดในสถานการณ์นั้น
 
-### Constants
+### ค่าคงที่
 
-Like immutable variables, *constants* are values that are bound to a name and
-are not allowed to change, but there are a few differences between constants
-and variables.
+เช่นเดียวกับตัวแปร immutable ค่าคงที่คือค่าที่กำหนดให้กับตัวแปรและไม่อนุญาตให้เปลี่ยนแปลงค่า
+แต่มีความแตกต่างเล็กน้อยระหว่างค่าคงที่และตัวแปร
 
-First, you aren’t allowed to use `mut` with constants. Constants aren’t just
-immutable by default—they’re always immutable. You declare constants using the
-`const` keyword instead of the `let` keyword, and the type of the value *must*
-be annotated. We’ll cover types and type annotations in the next section,
-[“Data Types”][data-types]<!-- ignore -->, so don’t worry about the details
-right now. Just know that you must always annotate the type.
+ข้อแรก คุณไม่สามารถใช้ `mut` กับค่าคงที่ได้ ค่าคงที่ไม่เพียงเป็น immutable โดยค่าเริ่มต้นเท่านั้น
+แต่มันเป็น immutable ตลอดไป คุณสามารถประกาศตัวแปรคงที่โดยใช้คีย์เวิร์ด `const` แทนคีย์เวิร์ด 
+`let` และ*ต้อง*ระบุประเภทตัวแปร เราจะอธิบายเกี่ยวกับประเภทและการระบุประเภทในหัวข้อถัดไป 
+[“ประเภทข้อมูล”][data-types] ดังนั้นไม่ต้องกังวลกับรายละเอียดในตอนนี้
+เพียงรู้ว่าคุณต้องระบุประเภทตัวแปรให้กับตัวแปรคงที่เสมอ
 
-Constants can be declared in any scope, including the global scope, which makes
-them useful for values that many parts of code need to know about.
+ตัวแปรคงที่ สามารถประกาศในขอบเขตใดก็ได้ รวมถึงขอบเขตที่อยู่นอกสุด
+ซึ่งทำให้มีประโยชน์สำหรับค่าที่ต้องนำไปใช้กับโค้ดหลายส่วน
 
-The last difference is that constants may be set only to a constant expression,
-not the result of a value that could only be computed at runtime.
+ข้อแตกต่างสุดท้ายคือ ตัวแปรคงที่ต้องระบุค่าที่ชัดเจนและคงที่เท่านั้น 
+ไม่สามารถเป็นผลลัพธ์จากการคำนวณขณะรันโปรแกรม (runtime)
 
-Here’s an example of a constant declaration:
+ต่อไปนี้เป็นตัวอย่างของการประการตัวแปรคงที่:
 
 ```rust
 const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;
@@ -181,6 +179,6 @@ can have.
 
 [comparing-the-guess-to-the-secret-number]:
 ch02-00-guessing-game-tutorial.html#comparing-the-guess-to-the-secret-number
-[data-types]: ch03-02-data-types.html#data-types
+[data-types]: ch03-02-data-types.html#ประเภทขอมูล
 [storing-values-with-variables]: ch02-00-guessing-game-tutorial.html#การจัดเกบคาดวยตัวแปร
 [const-eval]: ../reference/const_eval.html

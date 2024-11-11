@@ -15,7 +15,7 @@
 
 - [แนวคิดการเขียนโปรแกรมโดยทั่วไป](ch03-00-common-programming-concepts.md)
     - [ตัวแปรและความไม่แน่นอน](ch03-01-variables-and-mutability.md)
-    - [Data Types](ch03-02-data-types.md)
+    - [ประเภทข้อมูล](ch03-02-data-types.md)
     - [Functions](ch03-03-how-functions-work.md)
     - [Comments](ch03-04-comments.md)
     - [Control Flow](ch03-05-control-flow.md)
