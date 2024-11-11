@@ -29,24 +29,20 @@
 {{#include ../listings/ch03-common-programming-concepts/no-listing-01-variables-are-immutable/output.txt}}
 ```
 
-This example shows how the compiler helps you find errors in your programs.
-Compiler errors can be frustrating, but really they only mean your program
-isn’t safely doing what you want it to do yet; they do *not* mean that you’re
-not a good programmer! Experienced Rustaceans still get compiler errors.
+ตัวอย่างนี้แสดงให้เห็นว่าคอมไพเลอร์ช่วยคุณค้นหาข้อผิดพลาดในโปรแกรมของคุณได้อย่างไร
+ข้อผิดพลาดของคอมไพเลอร์อาจทำให้หงุดหงิด แต่จริง ๆ แล้วข้อผิดพลาดเหล่านี้หมายความว่าโปรแกรมของคุณยังไม่ปลอดภัยมากพอ
+ที่จะทำอะไรก็ตามที่คุณอยากทำ ซึ่ง*ไม่*ได้หมายความว่าคุณไม่ใช่โปรแกรมเมอร์ที่ดีแต่อย่างใด!
+Rustaceans ที่มีประสบการณ์ก็ยังคงได้รับข้อผิดพลาดจากคอมไพเลอร์
 
-You received the error message `` cannot assign twice to immutable variable `x`
-`` because you tried to assign a second value to the immutable `x` variable.
+คุณได้รับข้อความแสดงข้อผิดพลาด `` cannot assign twice to immutable variable `x` `` 
+เนื่องจากคุณพยายามกำหนดค่าให้กับตัวแปร `x` แบบ immutable เป็นครั้งที่สอง
 
-It’s important that we get compile-time errors when we attempt to change a
-value that’s designated as immutable because this very situation can lead to
-bugs. If one part of our code operates on the assumption that a value will
-never change and another part of our code changes that value, it’s possible
-that the first part of the code won’t do what it was designed to do. The cause
-of this kind of bug can be difficult to track down after the fact, especially
-when the second piece of code changes the value only *sometimes*. The Rust
-compiler guarantees that when you state that a value won’t change, it really
-won’t change, so you don’t have to keep track of it yourself. Your code is thus
-easier to reason through.
+เป็นเรื่องสำคัญที่เราควรได้รับข้อผิดพลาดขณะคอมไพล์ เมื่อพยายามเปลี่ยนค่าที่ถูกกำหนดให้เป็น immutable
+เพราะสถานการณ์เช่นนี้สามารถนำไปสู่ข้อผิดพลาดได้ หากโค้ดส่วนหนึ่งของเราทำงานบนสมมติฐานว่าค่าหนึ่งจะไม่เปลี่ยนแปลง
+แต่ส่วนอื่นของโค้ดเปลี่ยนค่าดังกล่าว โค้ดส่วนแรกอาจทำงานผิดพลาดจากที่ออกแบบไว้ 
+สาเหตุของข้อผิดพลาดประเภทนี้มักเป็นเรื่องยากที่จะตรวจสอบย้อนหลัง โดยเฉพาะอย่างยิ่งเมื่อโค้ดส่วนที่สองเปลี่ยนค่าเพียงบางค่าเท่านั้น
+คอมไพเลอร์ Rust รับประกันว่า เมื่อคุณระบุว่าค่าหนึ่งจะไม่เปลี่ยนแปลง ค่านั้นจะไม่เปลี่ยนแปลงจริง ๆ โดยที่คุณไม่ต้องติดตามเช็คด้วยตัวเอง
+โค้ดของคุณจึงง่ายต่อการวิเคราะห์
 
 But mutability can be very useful, and can make code more convenient to write.
 Although variables are immutable by default, you can make them mutable by
