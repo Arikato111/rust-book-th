@@ -44,30 +44,28 @@ Rustaceans ที่มีประสบการณ์ก็ยังคงไ
 คอมไพเลอร์ Rust รับประกันว่า เมื่อคุณระบุว่าค่าหนึ่งจะไม่เปลี่ยนแปลง ค่านั้นจะไม่เปลี่ยนแปลงจริง ๆ โดยที่คุณไม่ต้องติดตามเช็คด้วยตัวเอง
 โค้ดของคุณจึงง่ายต่อการวิเคราะห์
 
-But mutability can be very useful, and can make code more convenient to write.
-Although variables are immutable by default, you can make them mutable by
-adding `mut` in front of the variable name as you did in [Chapter
-2][storing-values-with-variables]<!-- ignore -->. Adding `mut` also conveys
-intent to future readers of the code by indicating that other parts of the code
-will be changing this variable’s value.
+แต่ mutable นั้นมีประโยชน์มาก และสามารถทำให้การเขียนโค้ดสดวกยิ่งขึ้น แม้ว่าตัวแปรจะเป็น immutable โดยค่าเริ่มต้น
+แต่คุณสามารถกำหนดเป็น mutable โดยเพิ่ม `mut` ไว้ข้างหน้าของชื่อตัวแปร ดังที่คุณได้ทำใน 
+[บทที่ 2][storing-values-with-variables] การเพิ่ม `mut` ยังสื่อความหมายให้กับผู้อ่านโค้ดในอนาคตด้วย
+โดยระบุว่าส่วนอื่น ๆ ของโค้ดจะเปลี่ยนค่าของตัวแปรนี้ได้
 
-For example, let’s change *src/main.rs* to the following:
+ตัวอย่างเช่น ลองเปลี่ยน *src/main.rs* ให้เป็นตามนี้:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">ชื่อไฟล์: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-02-adding-mut/src/main.rs}}
 ```
 
-When we run the program now, we get this:
+เมื่อเรารันโปรแกรมตอนนี้ เราจะได้ผลลัพธ์ดังนี้:
 
 ```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-02-adding-mut/output.txt}}
 ```
 
-We’re allowed to change the value bound to `x` from `5` to `6` when `mut` is
-used. Ultimately, deciding whether to use mutability or not is up to you and
-depends on what you think is clearest in that particular situation.
+เมื่อ `mut` ถูกใช้ เราได้รับอนุญาตให้เปลี่ยนค่าของ `x` จาก `5` เป็น `6` 
+ท้ายที่สุดแล้วการตัดสินใจว่าจะใช้ mutable 
+หรือไม่นั้นขึ้นอยู่กับคุณและขึ้นอยู่กับสิ่งที่คุณคิดว่าชัดเจนที่สุดในสถานการณ์นั้น
 
 ### Constants
 
