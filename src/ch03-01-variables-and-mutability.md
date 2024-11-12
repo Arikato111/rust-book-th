@@ -90,16 +90,13 @@ Rustaceans ที่มีประสบการณ์ก็ยังคงไ
 const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;
 ```
 
-The constant’s name is `THREE_HOURS_IN_SECONDS` and its value is set to the
-result of multiplying 60 (the number of seconds in a minute) by 60 (the number
-of minutes in an hour) by 3 (the number of hours we want to count in this
-program). Rust’s naming convention for constants is to use all uppercase with
-underscores between words. The compiler is able to evaluate a limited set of
-operations at compile time, which lets us choose to write out this value in a
-way that’s easier to understand and verify, rather than setting this constant
-to the value 10,800. See the [Rust Reference’s section on constant
-evaluation][const-eval] for more information on what operations can be used
-when declaring constants.
+ชื่อของตัวแปรคงที่คือ `THREE_HOURS_IN_SECONDS` และค่าของมันมาจากผลลัพธ์การคูณ 60 (จำนวนวินาทีในหนึ่งนาที)
+ด้วย 60 (จำนวนนาทีในหนึ่งชั่วโมง) ด้วย 3 (จำนวนชั่วโมงที่เราต้องการนับในโปรแกรมนี้)
+ธรรมเนียมการตั้งชื่อของ Rust สำหรับค่าคงที่คือการใช้ตัวพิมพ์ใหญ่ทั้งหมด โดยมีเครื่องหมายขีดเส้นใต้ระหว่างคำ
+คอมไพเลอร์สามารถประมวลผลหาค่าบางส่วนในขณะคอมไพล์ 
+ซึ่งช่วยให้เราสามารถเขียนค่านี้ในลักษณะที่ง่ายต่อการเข้าใจ
+แทนที่จะกำหนดค่าเป็น 10,800 ดูส่วน [การประเมินค่าคงที่ของ Rust Reference][const-eval]
+สำหรับข้อมูลเพิ่มเติมเกี่ยวกับการดำเนินการที่สามารถใช้เมื่อประกาศตัวแปรคงที่
 
 Constants are valid for the entire time a program runs, within the scope in
 which they were declared. This property makes constants useful for values in
@@ -181,4 +178,4 @@ can have.
 ch02-00-guessing-game-tutorial.html#comparing-the-guess-to-the-secret-number
 [data-types]: ch03-02-data-types.html#ประเภทขอมูล
 [storing-values-with-variables]: ch02-00-guessing-game-tutorial.html#การจัดเกบคาดวยตัวแปร
-[const-eval]: ../reference/const_eval.html
+[const-eval]: https://doc.rust-lang.org/stable/reference/const_eval.html 
