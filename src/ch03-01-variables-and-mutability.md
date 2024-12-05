@@ -98,16 +98,13 @@ const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;
 แทนที่จะกำหนดค่าเป็น 10,800 ดูส่วน [การประเมินค่าคงที่ของ Rust Reference][const-eval]
 สำหรับข้อมูลเพิ่มเติมเกี่ยวกับการดำเนินการที่สามารถใช้เมื่อประกาศตัวแปรคงที่
 
-Constants are valid for the entire time a program runs, within the scope in
-which they were declared. This property makes constants useful for values in
-your application domain that multiple parts of the program might need to know
-about, such as the maximum number of points any player of a game is allowed to
-earn, or the speed of light.
+ตัวแปรคงที่จะใช้ได้ตลอดระยะเวลาที่โปรแกรมรัน ภายในขอบเขตที่มีการประกาศตัวแปรคงที่
+คุณสมบัตินี้ทำให้ตัวแปรคงที่มีประโยชน์สำหรับค่าในขอบเขตแอปพลิเคชั่นของคุณ ซึ่งหลายส่วนของโปรแกรมอาจจำเป็นต้องรู้
+เช่น จำนวนคะแนนสูงสุดที่ผู้เล่นจะได้รับ หรือความเร็วแสง
 
-Naming hardcoded values used throughout your program as constants is useful in
-conveying the meaning of that value to future maintainers of the code. It also
-helps to have only one place in your code you would need to change if the
-hardcoded value needed to be updated in the future.
+การตั้งชื่อให้กับค่าที่ระบุโดยตรงในโค้ดซึ่งใช้งานทั่วทั้งโปรแกรมของคุณในรูปแบบค่าคงที่ 
+มีประโยชน์ในการสื่อความหมายของค่านั้นให้กับผู้ดูแลโค้ดในอนาคต 
+นอกจากนี้ยังช่วยให้คุณจำเป็นต้องแก้ไขโค้ดเพียงจุดเดียวเท่านั้น หากค่าคงที่นั้นจำเป็นต้องได้รับการเปลี่ยนแปลงในอนาคต
 
 ### Shadowing
 
