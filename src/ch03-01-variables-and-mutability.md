@@ -106,70 +106,61 @@ const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;
 มีประโยชน์ในการสื่อความหมายของค่านั้นให้กับผู้ดูแลโค้ดในอนาคต 
 นอกจากนี้ยังช่วยให้คุณจำเป็นต้องแก้ไขโค้ดเพียงจุดเดียวเท่านั้น หากค่าคงที่นั้นจำเป็นต้องได้รับการเปลี่ยนแปลงในอนาคต
 
-### Shadowing
+### การบดบัง (Shadowing)
 
-As you saw in the guessing game tutorial in [Chapter
-2][comparing-the-guess-to-the-secret-number]<!-- ignore -->, you can declare a
-new variable with the same name as a previous variable. Rustaceans say that the
-first variable is *shadowed* by the second, which means that the second
-variable is what the compiler will see when you use the name of the variable.
-In effect, the second variable overshadows the first, taking any uses of the
-variable name to itself until either it itself is shadowed or the scope ends.
-We can shadow a variable by using the same variable’s name and repeating the
-use of the `let` keyword as follows:
+ดั่งที่คุณได้เห็นในบทช่วยสอนเกมทายตัวเลขใน [บทที่ 2][comparing-the-guess-to-the-secret-number]
+คุณสามารถประกาศตัวแปรใหม่โดยใช้ชื่อเดียวกับตัวแปรก่อนหน้า Rustaceans บอกว่าตัวแปรแรกถูก *บดบัง* ด้วยตัวแปรตัวที่สอง
+ซึ่งหมายความว่าตัวแปรตัวที่สองคือสิ่งที่คอมไพเลอร์จะเห็นเมื่อคุณเรียกใช้ชื่อของตัวแปร ผลก็คือ ตัวแปรตัวที่สองจะบดบังตัวแปรแรก
+โดยนำการใช้ชื่อตัวแปรไปใช้กับตัวมันเอง จนกว่าตัวมันเองจะถูกบดบังไว้หรือสิ้นสุดขอบเขต
+เราสามารถบดบังตัวแปรได้โดยการใช้ชื่อตัวแปรเดียวกัน และการใช้คีย์เวิร์ด `let` ซ้ำ ดังต่อไปนี้:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">ชื่อไฟล์: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-03-shadowing/src/main.rs}}
 ```
 
-This program first binds `x` to a value of `5`. Then it creates a new variable
-`x` by repeating `let x =`, taking the original value and adding `1` so the
-value of `x` is then `6`. Then, within an inner scope created with the curly
-brackets, the third `let` statement also shadows `x` and creates a new
-variable, multiplying the previous value by `2` to give `x` a value of `12`.
-When that scope is over, the inner shadowing ends and `x` returns to being `6`.
-When we run this program, it will output the following:
+ขั้นแรก โปรแกรมนี้จะกำหนดให้ `x` มีค่าเป็น `5` จากนั้นจะสร้างตัวแปรใหม่ชื่อ `x` โดยการประกาศ `let x =` ซ้ำ
+และกำหนดค่าโดยนำค่าเดิมมาบวก `1` ดังนั้นค่าของ `x` จึงเป็น `6` จากนั้น ภายในขอบเขตที่สร้างโดยการประกาศวงเล็บปีกกา
+คำสั่ง `let` ลำดับที่สามจะบดบัง `x` และสร้างตัวแปรใหม่ให้มีค่าเป็น `12` ซึ่งเป็นผลลัพธ์จากการคูณค่าก่อนหน้าด้วย `2`
+เมื่อขอบเขตสิ้นสุดลง การบดบังที่อยู่ภายในจะสิ้นสุด และ `x` จะกลับมามีค่าเป็น `6`
+เมื่อเรารันโปรแกรมนี้ จะได้ผลลัพธ์ดังต่อไปนี้:
+
 
 ```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-03-shadowing/output.txt}}
 ```
+การบดบังแตกต่างจากการระบุตัวแปรเป็น `mut` เนื่องจากเราจะได้รับข้อผิดพลาดขณะคอมไพล์หากเราพยายามกำหนดค่าตัวแปรนี้ใหม่อย่างไม่ตั้งใจ
+โดยไม่ใช้คีย์เวิร์ด `let` เมื่อใช้ `let` เราสามารถทำการเปลี่ยนแปลงค่าได้เล็กน้อยโดยที่ตัวแปรจะยังคงเป็น immutable
+หลังจากการเปลี่ยนแปลงเสร็จสิ้นแล้ว
 
-Shadowing is different from marking a variable as `mut` because we’ll get a
-compile-time error if we accidentally try to reassign to this variable without
-using the `let` keyword. By using `let`, we can perform a few transformations
-on a value but have the variable be immutable after those transformations have
-been completed.
+ข้อแตกต่างอื่นระหว่าง `mut` และ การบดบัง ก็คือ เนื่องจากเรากำลังสร้างตัวแปรใหม่อย่างมีประสิทธิภาพ
+เมื่อเราใช้คีย์เวิร์ด `let` อีกครั้ง เราสามารถเปลี่ยนประเภทของตัวแปรโดยที่ยังใช้ชื่อตัวแปรเดิมได้
+ตัวอย่างเช่น สมมติว่าโปรแกรมขอให้ผู้ใช้ระบุจำนวนช่องว่างที่ต้องการแสดงผลระหว่างข้อความ โดยป้อนอักขระเว้นวรรค
+และจากนั้นเราจะเก็บ input นั้นในรูปแบบตัวเลข:
 
-The other difference between `mut` and shadowing is that because we’re
-effectively creating a new variable when we use the `let` keyword again, we can
-change the type of the value but reuse the same name. For example, say our
-program asks a user to show how many spaces they want between some text by
-inputting space characters, and then we want to store that input as a number:
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-04-shadowing-can-change-types/src/main.rs:here}}
 ```
 
-The first `spaces` variable is a string type and the second `spaces` variable
-is a number type. Shadowing thus spares us from having to come up with
-different names, such as `spaces_str` and `spaces_num`; instead, we can reuse
-the simpler `spaces` name. However, if we try to use `mut` for this, as shown
-here, we’ll get a compile-time error:
+ตัวแปร `spaces` ลำดับแรกมีประเภทเป็น string และตัวแปร `spaces` ลำดับที่สองมีประเภทเป็นตัวเลข
+การบดบังช่วยให้เราไม่ต้องคิดชื่อที่แตกต่างกัน เช่น `spaces_str` และ `spaces_num`; 
+แต่เราสามารถนำชื่อ `spaces` ที่เรียบง่ายกว่ามาใช้ซ้ำได้
+อย่างไรก็ตาม หากเราพยายามที่จะใช้ `mut` สำหรับสิ่งนี้ เราจะได้รับข้อผิดพลาดขณะคอมไพล์ ดังที่แสดงต่อไปนี้:
+
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-05-mut-cant-change-types/src/main.rs:here}}
 ```
 
-The error says we’re not allowed to mutate a variable’s type:
+ข้อผิดพลาดแจ้งว่าเราไม่ได้รับอนุญาตให้เปลี่ยนประเภทของตัวแปร:
 
 ```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-05-mut-cant-change-types/output.txt}}
 ```
 
-Now that we’ve explored how variables work, let’s look at more data types they
-can have.
+ตอนนี้เราได้สำรวจวิธีการทำงานของตัวแปรแล้ว มาดูประเภทข้อมูลเพิ่มเติมที่ตัวแปรนั้นสามารถมีได้
 
 [comparing-the-guess-to-the-secret-number]:
 ch02-00-guessing-game-tutorial.html#comparing-the-guess-to-the-secret-number
